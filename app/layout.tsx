@@ -1,7 +1,11 @@
-import MdxProvider from "@/components/mdx/MdxProvider";
 import type { Metadata } from "next";
-import { pretendard } from "./fonts";
 import "./globals.css";
+
+import { pretendard } from "./fonts";
+
+import Header from "@/components/common/header/Header";
+import MdxProvider from "@/components/mdx/MdxProvider";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Jonghoon Portfolio",
@@ -13,10 +17,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // script : 저장된 theme 읽고, 없으면 light
   return (
     <html lang="ko" className={`${pretendard.variable}`}>
+      <head>
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`(function(){
+            try {
+              var root = document.documentElement;
+              var t = localStorage.getItem('theme') || 'light';
+              if (t === 'dark') root.classList.add('dark');
+            } catch (e) {}
+          })();`}
+        </Script>
+      </head>
       <body>
-        <MdxProvider>{children}</MdxProvider>
+        <MdxProvider>
+          <Header />
+          {children}
+        </MdxProvider>
       </body>
     </html>
   );
