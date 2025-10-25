@@ -1,3 +1,5 @@
+"use client";
+
 import { MDXProvider } from "@mdx-js/react";
 
 type HtmlProps<T> = React.DetailedHTMLProps<React.HTMLAttributes<T>, T>;

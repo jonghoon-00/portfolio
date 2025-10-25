@@ -1,26 +1,189 @@
 @import "tailwindcss";
 
+/* ========== Light / Dark CSS Variables ========== */
+/* RGB로 두는 이유: Tailwind의 <alpha-value> 지원 */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light tokens */
+  --surface: 248 249 251; /* #F8F9FB */
+  --surface-card: 255 255 255; /* #FFFFFF */
+
+  --text-strong: 17 24 39; /* #111827 */
+  --text-muted: 107 114 128; /* #6B7280 */
+
+  --shadow-card: 0 0 0 / 0.06; /* 사용은 유틸에서 */
+  --shadow-soft: 0 0 0 / 0.04;
+
+  --section-gap: 88px;
+  --card-radius: 12px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* 다크모드: html.dark 를 기준으로 변수 교체 */
+html.dark {
+  --surface: 12 13 16; /* #0C0D10 */
+  --surface-card: 17 18 22; /* #111216 */
+
+  --text-strong: 229 231 235; /* #E5E7EB */
+  --text-muted: 156 163 175; /* #9CA3AF */
+
+  --shadow-card: 0 0 0 / 0.35;
+  --shadow-soft: 0 0 0 / 0.25;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ========== Base ========== */
+/* HTML 요소에 적용되는 기본 스타일 정의 */
+@layer base {
+  html {
+    font-synthesis-weight: none;
+    font-synthesis-style: none;
+  }
+  body {
+    font-family: var(--font-pretendard), ui-sans-serif, system-ui,
+      "Noto Sans KR", "Apple SD Gothic Neo", "Segoe UI", Arial, sans-serif;
+    color: rgb(var(--text-strong));
+    background-color: rgb(var(--surface));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  h1 {
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.15;
+  }
+  h2 {
+    font-size: clamp(22px, 3vw, 32px);
+    line-height: 1.2;
+  }
+  h3 {
+    font-size: clamp(18px, 2.4vw, 24px);
+    line-height: 1.25;
+  }
+
+  p {
+    line-height: 1.75;
+    color: rgb(var(--text-muted));
+  }
+  a {
+    color: #3b6ae0;
+    text-underline-offset: 2px;
+  }
+  a:hover {
+    color: #3159c4;
+  }
+
+  /* 전환 시 깜빡임 줄이기: 색상/배경만 전역 전환 */
+  * {
+    transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+  }
+  .no-theme-transition * {
+    transition: none !important;
+  } /* 토글 순간에 임시로 부여 */
+}
+
+/* ========== Utilities ========== */
+/* 우선순위가 가장 높은 가장 작은 단위의 클래스 정의 */
+@layer utilities {
+  .section {
+    padding-block: var(--section-gap);
+  }
+  .card {
+    background: rgb(var(--surface-card));
+    border-radius: var(--card-radius);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, calc(var(--shadow-card) / 1)); /* 시맨틱 유지 */
+  }
+  .shadow-soft {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, calc(var(--shadow-soft) / 1));
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid rgb(229 231 235); /* neutral-200 */
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .btn-primary {
+    composes: btn;
+    background: #3b6ae0;
+    color: #fff;
+    border-color: #3b6ae0;
+  }
+  .btn-primary:hover {
+    background: #3159c4;
+    border-color: #3159c4;
+  }
+  .btn-ghost {
+    composes: btn;
+    background: transparent;
+    color: rgb(var(--text-strong));
+  }
+  .btn-ghost:hover {
+    background: rgb(243 244 246);
+  } /* neutral-100 */
+}
+
+/* ========== Animations ========== */
+@keyframes type {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes caret {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: white;
-  color: black;
-  font-family: Arial, Helvetica, sans-serif;
+.hero-typing {
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.hero-typing::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 1.2em;
+  margin-left: 2px;
+  background: currentColor;
+  animation: caret 1s step-end infinite;
+}
+.animate-typing {
+  animation: type 1.2s steps(24, end) 1 both;
+}
+.animate-fadeUp {
+  animation: fadeUp 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
