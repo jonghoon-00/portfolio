@@ -1,3 +1,4 @@
+import typography from "@tailwindcss/typography";
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -74,5 +75,5 @@ module.exports = {
       maxWidth: { container: "1100px" },
     },
   },
-  plugins: [],
+  plugins: [typography()],
 };
