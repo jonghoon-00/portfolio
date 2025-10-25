@@ -1,23 +1,28 @@
-// slug/타이틀/경로 정보
+import { PROJECT_IDS } from "@/constants/projectIds";
+import { ProjectMetaBase } from "@/types/project";
 
-export type Project = {
-  slug: string; // 동적 라우팅 키
-  title: string;
-  summary?: string;
-  tags?: string[];
-  // 필요시 MDX 경로 등도 메타로
-  mdx?: {
-    overview?: string; // 예: '/content/projects/k-nostalgia/overview.mdx'
-  };
-};
-
-export const projects: Project[] = [
+export const PROJECTS: ProjectMetaBase[] = [
   {
-    slug: "k-nostalgia",
-    title: "향그리움 (전통시장 커머스)",
-    summary: "쿠폰/배송지/결제 흐름을 일관된 상태로 설계·구현",
-    tags: ["Next.js", "Tailwind", "Zustand"],
-    mdx: { overview: "/content/projects/k-nostalgia/overview.mdx" },
+    id: PROJECT_IDS.K_NOSTALGIA,
+    title: "향그리움 (K-Nostalgia)",
+    accent: "#BD873F",
+    type: "team",
+    techs: [
+      "Next.js",
+      "TS",
+      "Tailwind",
+      "TanStack Query",
+      "Zustand",
+      "Supabase",
+    ],
+    mdx: () => import("@/content/projects/k-nostalgia/overview.mdx"),
   },
-  // ...다른 프로젝트들
 ];
+
+// 편의 함수
+export const mainProjects = PROJECTS.filter((p) =>
+  ["k-nostalgia", "expense-tracker"].includes(p.id)
+);
+export const otherProjects = PROJECTS.filter((p) => !mainProjects.includes(p));
+export const getProjectById = (id: string) =>
+  PROJECTS.find((p) => p.id === id) ?? null;
