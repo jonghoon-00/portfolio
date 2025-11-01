@@ -4,12 +4,15 @@
 
 /* 기본 색상(light) */
 :root {
-  --surface: #f8f9fb;
-  --surface-card: #ffffff;
-  --text-strong: #111827;
-  --text-muted: #6b7280;
+  --surface: 248 249 251; /* #f8f9fb */
+  --surface-card: 255 255 255; /* #ffffff */
+  --text-strong: 17 24 39; /* #111827 */
+  --text-muted: 107 114 128; /* #6b7280 */
 
-  --shadow-card: 0 0 0 / 0.06; /* 사용은 유틸에서 */
+  --border: 229 231 235; /* neutral-200 */
+  --border-soft: 241 245 249; /* slate-100 */
+
+  --shadow-card: 0 0 0 / 0.06;
   --shadow-soft: 0 0 0 / 0.04;
   --section-gap: 88px;
   --card-radius: 12px;
@@ -17,11 +20,13 @@
 
 /* dark */
 html.dark {
-  --surface: #0c0d10;
-  --surface-card: #111216;
-  --text-strong: #e5e7eb;
-  --text-muted: #9ca3af;
+  --surface: 12 13 16; /* #0c0d10 */
+  --surface-card: 17 18 22; /* #111216 */
+  --text-strong: 229 231 235; /* #e5e7eb */
+  --text-muted: 156 163 175; /* #9ca3af */
 
+  --border: 48 52 61; /* ~ slate-700 */
+  --border-soft: 31 32 36; /* ~ near card */
   --shadow-card: 0 0 0 / 0.35;
   --shadow-soft: 0 0 0 / 0.25;
 }
@@ -34,8 +39,8 @@ html.dark {
     font-synthesis-style: none;
   }
   body {
-    background-color: var(--surface);
-    color: var(--text-strong);
+    background-color: rgb(var(--surface));
+    color: rgb(var(--text-strong));
     font-family: var(--font-pretendard), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
@@ -71,13 +76,13 @@ html.dark {
     color: #3159c4;
   }
 
-  /* 전환 시 깜빡임 줄이기: 색상/배경만 전역 전환 */
+  /* 전환 */
   * {
     transition: color 0.15s, background-color 0.15s, border-color 0.15s;
   }
   .no-theme-transition * {
     transition: none !important;
-  } /* 토글 순간에 임시로 부여 */
+  }
 }
 
 /* ========== Utilities ========== */
@@ -86,10 +91,12 @@ html.dark {
   .section {
     padding-block: var(--section-gap);
   }
+
   .card {
     background: rgb(var(--surface-card));
     border-radius: var(--card-radius);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, calc(var(--shadow-card) / 1)); /* 시맨틱 유지 */
+    border: 1px solid rgb(var(--border) / 0.6);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, calc(var(--shadow-card) / 1));
   }
   .shadow-soft {
     box-shadow: 0 2px 10px rgba(0, 0, 0, calc(var(--shadow-soft) / 1));
@@ -98,10 +105,11 @@ html.dark {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    border: 1px solid rgb(229 231 235); /* neutral-200 */
+    border: 1px solid rgb(var(--border));
     border-radius: 9999px;
     padding: 0.25rem 0.75rem;
     font-size: 0.875rem;
+    background: rgb(var(--surface-card) / 0.6);
   }
   .btn {
     display: inline-flex;
@@ -111,7 +119,6 @@ html.dark {
     border-radius: 0.75rem;
     font-weight: 500;
     border: 1px solid transparent;
-    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
   }
   .btn-primary {
     composes: btn;
@@ -127,10 +134,12 @@ html.dark {
     composes: btn;
     background: transparent;
     color: rgb(var(--text-strong));
+    border-color: rgb(var(--border) / 0.5);
   }
   .btn-ghost:hover {
-    background: rgb(243 244 246);
-  } /* neutral-100 */
+    background: rgb(var(--surface-card) / 0.6);
+    border-color: rgb(var(--border));
+  }
 }
 
 /* ========== Animations ========== */
@@ -181,4 +190,25 @@ html.dark {
 }
 .animate-fadeUp {
   animation: fadeUp 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* prose 색상을 변수로 맞춤 */
+.prose {
+  --tw-prose-body: rgb(var(--text-strong));
+  --tw-prose-headings: rgb(var(--text-strong));
+  --tw-prose-lead: rgb(var(--text-muted));
+  --tw-prose-links: #3b6ae0;
+  --tw-prose-bold: rgb(var(--text-strong));
+  --tw-prose-counters: rgb(var(--text-muted));
+  --tw-prose-bullets: rgb(var(--text-muted));
+  --tw-prose-hr: rgb(var(--border));
+  --tw-prose-quotes: rgb(var(--text-strong));
+  --tw-prose-quote-borders: rgb(var(--border));
+  --tw-prose-captions: rgb(var(--text-muted));
+  --tw-prose-code: rgb(var(--text-strong));
+  --tw-prose-pre-code: rgb(var(--text-strong));
+  --tw-prose-pre-bg: rgb(var(--surface-card));
+  --tw-prose-th-borders: rgb(var(--border));
+  --tw-prose-td-borders: rgb(var(--border));
+  color: rgb(var(--text-strong));
 }
