@@ -6,6 +6,7 @@ import { pretendard } from "./fonts";
 import Header from "@/components/common/header/Header";
 import MdxProvider from "@/components/mdx/MdxProvider";
 import Script from "next/script";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "Jonghoon Portfolio",
@@ -14,8 +15,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal, // 병렬 슬롯. @modal
 }: Readonly<{
   children: React.ReactNode;
+  modal?: React.ReactNode;
 }>) {
   // script : 저장된 theme 읽고, 없으면 light
   return (
@@ -35,6 +38,7 @@ export default function RootLayout({
         <MdxProvider>
           <Header />
           {children}
+          {modal}
         </MdxProvider>
       </body>
     </html>

@@ -15,14 +15,14 @@ export const PROJECTS: ProjectMetaBase[] = [
       "Zustand",
       "Supabase",
     ],
-    mdx: () => import("@/content/projects/k-nostalgia/overview.mdx"),
+    mdx: () => import("@/markdown/projects/k-nostalgia/overView.mdx"),
   },
 ];
 
 // 편의 함수
 export const mainProjects = PROJECTS.filter((p) =>
-  ["k-nostalgia", "expense-tracker"].includes(p.id)
+  ["k-nostalgia"].includes(p.id)
 );
 export const otherProjects = PROJECTS.filter((p) => !mainProjects.includes(p));
-export const getProjectById = (id: string) =>
+export const getProjectById = (id: string): ProjectMetaBase | null =>
   PROJECTS.find((p) => p.id === id) ?? null;

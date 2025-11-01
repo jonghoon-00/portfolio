@@ -1,8 +1,11 @@
-// 외부 로직 x, 랜딩 조립만
+import MainProjects from "@/components/views/projects/MainProjects";
+import OtherProjects from "@/components/views/projects/OtherProjects";
+
 export default function Home() {
   return (
-    <div>
-      <h1>다크모드 적용 확인</h1>
-    </div>
+    <main className="max-w-5xl mx-auto px-4 py-10 space-y-10">
+      <MainProjects />
+      <OtherProjects />
+    </main>
   );
 }
