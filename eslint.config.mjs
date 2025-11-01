@@ -21,6 +21,11 @@ const eslintConfig = defineConfig([
           "@typescript-eslint/no-require-imports": "off",
         },
       },
+      {
+        files: ["**/*.mdx"],
+        extends: ["plugin:mdx/recommended"],
+        rules: {},
+      },
     ],
   },
 ]);
