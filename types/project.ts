@@ -9,5 +9,5 @@ export interface ProjectMetaBase {
   accent?: string; // 글자 강조색
   type: ProjectType;
   techs: string[]; // 카드/리스트에 노출할 대표 기술 스택
-  mdx?: () => Promise<{ default: React.ComponentType<any> }>; // 상세 MDX(선택)
+  mdx: () => Promise<{ default: React.ComponentType<any> }>; // 상세 MDX(선택)
 }
