@@ -2,6 +2,10 @@
 
 import React from "react";
 
+import { Col, Columns } from "@/components/layout/Columns";
+import { Section } from "@/components/layout/Section";
+
+// tag
 function H1(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h1 className="text-3xl md:text-4xl font-bold tracking-tight" {...props} />
@@ -24,6 +28,8 @@ function Blockquote(props: React.HTMLAttributes<HTMLQuoteElement>) {
     <blockquote className="border-l-4 pl-4 italic opacity-90" {...props} />
   );
 }
+
+// custom
 export function Accent({ children }: { children: React.ReactNode }) {
   return (
     <span style={{ color: "var(--accent)" }} className="font-semibold">
@@ -55,5 +61,10 @@ export const mdxComponents = {
   ol: Ol,
   blockquote: Blockquote,
   img: MdImg,
-  Accent,
+  Accent, // 프로젝트 별 강조색
+
+  // 커스텀 컴포넌트
+  Columns,
+  Col,
+  Section,
 };
