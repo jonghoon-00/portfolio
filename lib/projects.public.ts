@@ -1,4 +1,4 @@
-import { PROJECT_IDS } from "@/constants/projectIds";
+import { MAIN_PROJECT_IDS, PROJECT_IDS } from "@/constants/projectIds";
 import { ProjectMetaBase } from "@/types/project";
 
 export const PROJECTS: ProjectMetaBase[] = [
@@ -15,13 +15,12 @@ export const PROJECTS: ProjectMetaBase[] = [
       "Zustand",
       "Supabase",
     ],
-    mdx: () => import("@/markdown/projects/k-nostalgia/overView.mdx"),
   },
-];
+] satisfies ProjectMetaBase[];
 
 // 편의 함수
 export const mainProjects = PROJECTS.filter((p) =>
-  ["k-nostalgia"].includes(p.id)
+  MAIN_PROJECT_IDS.includes(p.id)
 );
 export const otherProjects = PROJECTS.filter((p) => !mainProjects.includes(p));
 export const getProjectById = (id: string): ProjectMetaBase | null =>

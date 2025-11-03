@@ -1,4 +1,4 @@
-import { mainProjects } from "@/lib/projects";
+import { mainProjects } from "@/lib/projects.public";
 import Link from "next/link";
 
 export default function MainProjects() {
