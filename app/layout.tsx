@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+import React from "react";
 import "./globals.css";
 
 import { pretendard } from "./fonts";
 
 import Header from "@/components/common/header/Header";
-import MdxProvider from "@/components/mdx/MdxProvider";
-import Script from "next/script";
-import React from "react";
 
 export const metadata: Metadata = {
   title: "Jonghoon Portfolio",
@@ -35,11 +34,9 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-        <MdxProvider>
-          <Header />
-          {children}
-          {modal}
-        </MdxProvider>
+        <Header />
+        {children}
+        {modal}
       </body>
     </html>
   );
