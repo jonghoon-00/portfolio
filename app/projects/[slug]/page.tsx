@@ -1,14 +1,22 @@
 import ClientMDXLoader from "@/components/mdx/ClientMDXLoader";
+import { PROJECT_IDS } from "@/constants/projectIds";
 import { getProjectById } from "@/lib/projects.public";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+export function generateStaticParams() {
+  return Object.values(PROJECT_IDS).map((slug) => ({
+    slug,
+  }));
+}
+
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const project = getProjectById(params.slug);
+  const { slug } = await params;
+  const project = getProjectById(slug);
   if (!project) {
     notFound();
   }
@@ -18,8 +26,12 @@ export async function generateMetadata({
   };
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
   const project = getProjectById(slug);
 
   if (!project) {
