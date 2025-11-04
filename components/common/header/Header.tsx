@@ -13,14 +13,15 @@ export default function Header() {
         "border-b dark:border-neutral-200 border-neutral-800"
       )}
     >
-      <Link href="/" className="font-semibold text-lg">
-        {/* TODO 추후 수정 */}
-        Jonghoon.dev
-      </Link>
-
-      <nav className="flex items-center gap-3">
+      <div className="flex gap-4">
+        <Link href="/" className="font-semibold text-lg">
+          {/* TODO 추후 수정 */}
+          Jonghoon.dev
+        </Link>
         <ThemeToggle />
-      </nav>
+      </div>
+      {/* TODO 각 파트 이동용 NA바 제작 */}
+      <nav className="flex items-center gap-3"> nav바</nav>
     </header>
   );
 }
