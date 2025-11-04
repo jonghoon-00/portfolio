@@ -1,5 +1,5 @@
 import ClientMDXLoader from "@/components/mdx/ClientMDXLoader";
-import Modal from "@/components/ui/Modal";
+import ProjectModal from "@/components/ui/Modal";
 import { getProjectById } from "@/lib/projects.public";
 
 export default async function ProjectModalPage({
@@ -13,8 +13,8 @@ export default async function ProjectModalPage({
   if (!project) return null;
 
   return (
-    <Modal title={project.title} accent={project.accent}>
+    <ProjectModal title={project.title} accent={project.accent}>
       <ClientMDXLoader slug={slug as any} project={project} />
-    </Modal>
+    </ProjectModal>
   );
 }
