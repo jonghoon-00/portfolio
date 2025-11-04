@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
 /* ========== Light / Dark CSS Variables ========== */
-
-/* 기본 색상(light) */
 :root {
   --surface: 248 249 251; /* #f8f9fb */
   --surface-card: 255 255 255; /* #ffffff */
@@ -12,13 +10,22 @@
   --border: 229 231 235; /* neutral-200 */
   --border-soft: 241 245 249; /* slate-100 */
 
-  --shadow-card: 0 0 0 / 0.06;
-  --shadow-soft: 0 0 0 / 0.04;
+  /* 카드/섹션 */
   --section-gap: 88px;
   --card-radius: 12px;
+
+  /* ===== Modal tokens ===== */
+  --modal-max-w-desktop: 960px;
+  --modal-max-w-desktop-wide: 1100px;
+  --modal-side-gap: 24px; /* 모바일 좌우 여백 */
+  --modal-padding-mobile: 16px;
+  --modal-padding-desktop: 32px;
+  --modal-height-desktop-gap: 160px; /* desktop 상하 여백 합(헤더/풋터 여지) */
+
+  --scrollbar-thumb: rgba(0, 0, 0, 0.22);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.34);
 }
 
-/* dark */
 html.dark {
   --surface: 12 13 16; /* #0c0d10 */
   --surface-card: 17 18 22; /* #111216 */
@@ -27,12 +34,12 @@ html.dark {
 
   --border: 48 52 61; /* ~ slate-700 */
   --border-soft: 31 32 36; /* ~ near card */
-  --shadow-card: 0 0 0 / 0.35;
-  --shadow-soft: 0 0 0 / 0.25;
+
+  --scrollbar-thumb: rgba(255, 255, 255, 0.24);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.36);
 }
 
 /* ========== Base ========== */
-/* HTML 요소에 적용되는 기본 스타일 정의 */
 @layer base {
   html {
     font-synthesis-weight: none;
@@ -68,6 +75,7 @@ html.dark {
     line-height: 1.75;
     color: rgb(var(--text-muted));
   }
+
   a {
     color: #3b6ae0;
     text-underline-offset: 2px;
@@ -76,7 +84,6 @@ html.dark {
     color: #3159c4;
   }
 
-  /* 전환 */
   * {
     transition: color 0.15s, background-color 0.15s, border-color 0.15s;
   }
@@ -86,21 +93,95 @@ html.dark {
 }
 
 /* ========== Utilities ========== */
-/* 우선순위가 가장 높은 가장 작은 단위의 클래스 정의 */
 @layer utilities {
   .section {
     padding-block: var(--section-gap);
+  }
+
+  /* ---- Modal ---- */
+  .project-modal {
+    background: rgb(var(--surface-card));
+    color: rgb(var(--text-strong));
+    border-radius: var(--card-radius);
+    border: 1px solid rgb(var(--border) / 0.6);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+
+    width: 100%;
+    margin-inline: auto;
+    overflow: auto;
+
+    /* 데스크탑 기본 */
+    max-width: min(var(--modal-max-w-desktop), 92vw);
+    max-height: calc(100dvh - var(--modal-height-desktop-gap));
+    padding: var(--modal-padding-desktop);
+
+    /* Firefox */
+    scrollbar-width: thin; /* auto | thin | none */
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+
+    /* 레이아웃 점프 방지(윈도우) */
+    scrollbar-gutter: stable both-edges;
+  }
+  /* WebKit(Chrome, Edge, Safari) */
+  .project-modal::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .project-modal::-webkit-scrollbar-track {
+    background: transparent; /* 트랙(배경) 투명 */
+  }
+  .project-modal::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb); /* 얇은 회색(다크모드 대응) */
+    border-radius: 9999px;
+    /* 트랙과 여백이 느껴지도록 투명 보더 */
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  .project-modal::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+  }
+  .project-modal::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none; /* 버튼 숨김 */
+  }
+  .project-modal::-webkit-scrollbar-corner {
+    background: transparent; /* 양 스크롤 만나는 코너도 투명 */
+  }
+
+  /* 모바일(sheet) */
+  @media (max-width: 767.98px) {
+    .project-modal {
+      position: fixed;
+      inset: 0;
+      max-width: none;
+      height: 100dvh;
+      border-radius: 0;
+      border: none;
+      padding: calc(var(--modal-padding-mobile) + env(safe-area-inset-top))
+        var(--modal-side-gap)
+        calc(var(--modal-padding-mobile) + env(safe-area-inset-bottom));
+      box-shadow: none;
+      overscroll-behavior: contain;
+    }
+  }
+
+  /* 프로젝트 상세만 넓게 쓰고 싶을 때 */
+  .project-modal--wide {
+    max-width: min(var(--modal-max-w-desktop-wide), 92vw);
   }
 
   .card {
     background: rgb(var(--surface-card));
     border-radius: var(--card-radius);
     border: 1px solid rgb(var(--border) / 0.6);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, calc(var(--shadow-card) / 1));
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
   }
+
   .shadow-soft {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, calc(var(--shadow-soft) / 1));
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
   }
+
   .pill {
     display: inline-flex;
     align-items: center;
@@ -111,6 +192,8 @@ html.dark {
     font-size: 0.875rem;
     background: rgb(var(--surface-card) / 0.6);
   }
+
+  /* 버튼: CSS Modules 아닌 전역 CSS라서 composes 사용 X */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -119,51 +202,89 @@ html.dark {
     border-radius: 0.75rem;
     font-weight: 500;
     border: 1px solid transparent;
+    cursor: pointer;
   }
   .btn-primary {
-    composes: btn;
     background: #3b6ae0;
     color: #fff;
     border-color: #3b6ae0;
+    cursor: pointer;
   }
   .btn-primary:hover {
     background: #3159c4;
     border-color: #3159c4;
+    cursor: pointer;
   }
+
   .btn-ghost {
-    composes: btn;
     background: transparent;
     color: rgb(var(--text-strong));
     border-color: rgb(var(--border) / 0.5);
+    cursor: pointer;
   }
   .btn-ghost:hover {
     background: rgb(var(--surface-card) / 0.6);
     border-color: rgb(var(--border));
+    cursor: pointer;
+  }
+
+  /* 모달 타이포: 모달 내부만 살짝 키워 가독성 보강 */
+  .modal-typography {
+    font-size: 15.5px;
+    line-height: 1.75;
+  }
+  @media (min-width: 768px) {
+    .modal-typography {
+      font-size: 16px;
+    }
+  }
+  .modal-typography h1 {
+    font-size: clamp(24px, 4.4vw, 34px);
+  }
+  .modal-typography h2 {
+    font-size: clamp(20px, 3.4vw, 28px);
+  }
+  .modal-typography h3 {
+    font-size: clamp(18px, 2.6vw, 22px);
+  }
+
+  /* 닫기 버튼(모바일 우상단 고정) */
+  .modal-close {
+    position: absolute;
+    top: calc(8px + env(safe-area-inset-top));
+    right: 8px;
+    z-index: 10;
+  }
+
+  .modal-body {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  /* 애니메이션 */
+  .modal-enter {
+    animation: modalIn 0.18s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  .sheet-enter {
+    animation: sheetIn 0.18s cubic-bezier(0.22, 0.61, 0.36, 1) both;
   }
 }
 
 /* ========== Animations ========== */
-@keyframes type {
+@keyframes modalIn {
   from {
-    width: 0;
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
   }
   to {
-    width: 100%;
-  }
-}
-@keyframes caret {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  50% {
     opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
-@keyframes fadeUp {
+@keyframes sheetIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -171,28 +292,7 @@ html.dark {
   }
 }
 
-.hero-typing {
-  position: relative;
-  white-space: nowrap;
-  overflow: hidden;
-}
-.hero-typing::after {
-  content: "";
-  display: inline-block;
-  width: 1px;
-  height: 1.2em;
-  margin-left: 2px;
-  background: currentColor;
-  animation: caret 1s step-end infinite;
-}
-.animate-typing {
-  animation: type 1.2s steps(24, end) 1 both;
-}
-.animate-fadeUp {
-  animation: fadeUp 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-/* prose 색상을 변수로 맞춤 */
+/* prose 컬러 변수 유지 */
 .prose {
   --tw-prose-body: rgb(var(--text-strong));
   --tw-prose-headings: rgb(var(--text-strong));
@@ -211,4 +311,9 @@ html.dark {
   --tw-prose-th-borders: rgb(var(--border));
   --tw-prose-td-borders: rgb(var(--border));
   color: rgb(var(--text-strong));
+}
+
+/* 스크롤바 */
+body {
+  scrollbar-width: thin;
 }

@@ -1,4 +1,6 @@
+// tailwind.config.js
 import typography from "@tailwindcss/typography";
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -8,14 +10,23 @@ module.exports = {
     "./content/**/*.{md,mdx}",
   ],
   theme: {
+    // 화면 폭 기준
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
     container: {
       center: true,
       padding: { DEFAULT: "1rem", md: "2rem" },
-      screens: { "2xl": "1160px" }, // 데스크탑 최대폭
+      // 포트폴리오 본문 최대폭
+      screens: { "2xl": "1160px" },
     },
+
     extend: {
       colors: {
-        // CSS 변수 바인딩(라이트/다크 토큰은 global.css에서 관리)
         surface: {
           DEFAULT: "rgb(var(--surface) / <alpha-value>)",
           card: "rgb(var(--surface-card) / <alpha-value>)",
@@ -54,25 +65,14 @@ module.exports = {
         card: "0 6px 24px rgba(0,0,0,0.06)",
         soft: "0 2px 10px rgba(0,0,0,0.04)",
       },
-      transitionDuration: {
-        fast: "150ms",
-        slow: "400ms",
-      },
+      transitionDuration: { fast: "150ms", slow: "400ms" },
       transitionTimingFunction: { "out-smooth": "cubic-bezier(.22,.61,.36,1)" },
-      keyframes: {
-        type: { "0%": { width: "0" }, "100%": { width: "100%" } },
-        caret: { "0%,100%": { opacity: "0" }, "50%": { opacity: "1" } },
-        fadeUp: {
-          "0%": { opacity: 0, transform: "translateY(8px)" },
-          "100%": { opacity: 1, transform: "translateY(0)" },
-        },
+
+      maxWidth: {
+        container: "1100px",
+        "modal-narrow": "960px",
+        "modal-wide": "1100px",
       },
-      animation: {
-        typing: "type 1.2s steps(24, end) 1 both",
-        caret: "caret 1s step-end infinite",
-        fadeUp: "fadeUp .45s ease-out both",
-      },
-      maxWidth: { container: "1100px" },
     },
   },
   plugins: [typography()],
