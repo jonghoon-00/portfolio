@@ -21,7 +21,11 @@ export default function RootLayout({
 }>) {
   // script : 저장된 theme 읽고, 없으면 light
   return (
-    <html lang="ko" className={`${pretendard.variable}`}>
+    <html
+      lang="ko"
+      className={`${pretendard.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <Script id="theme-init" strategy="beforeInteractive">
           {`(function(){
