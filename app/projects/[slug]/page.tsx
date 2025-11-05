@@ -1,4 +1,4 @@
-import ClientMDXLoader from "@/components/mdx/ClientMDXLoader";
+import { Prose } from "@/components/mdx/Prose";
 import { PROJECT_IDS } from "@/constants/projectIds";
 import { getProjectById } from "@/lib/projects.public";
 import { Metadata } from "next";
@@ -37,11 +37,16 @@ export default async function ProjectPage({
   if (!project) {
     notFound();
   }
+  const { default: Mdx } = await project.mdx();
 
   return (
     <main className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl md:text-4xl font-bold">{project.title}</h1>
-      <ClientMDXLoader slug={slug as any} project={project} />
+      <h1 className="text-3xl md:text-4xl font-bold mb-4">{project.title}</h1>
+      <article style={{ ["--accent" as any]: project.accent }}>
+        <Prose>
+          <Mdx />
+        </Prose>
+      </article>
     </main>
   );
 }

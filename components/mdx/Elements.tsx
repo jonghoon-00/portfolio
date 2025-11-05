@@ -1,5 +1,3 @@
-"use client";
-
 import clsx from "clsx";
 import React from "react";
 
@@ -39,7 +37,7 @@ function H4(props: React.HTMLAttributes<HTMLHeadingElement>) {
 function P(props: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className="my-2 leading-7 text-[0.98rem] md:text-base text-(--text-strong)"
+      className="my-2 leading-7 text-[0.98rem] md:text-base text-[rgb(var(--text-strong))]"
       {...props}
     />
   );
@@ -69,7 +67,7 @@ function Li(props: React.LiHTMLAttributes<HTMLLIElement>) {
 function Blockquote(props: React.HTMLAttributes<HTMLQuoteElement>) {
   return (
     <blockquote
-      className="my-4 border-l-4 pl-4 text-[0.98rem] md:text-base italic text-[var(--text-muted)]"
+      className="my-4 border-l-4 pl-4 text-[0.98rem] md:text-base italic text-(--text-muted)"
       {...props}
     />
   );
@@ -188,8 +186,16 @@ function Summary(props: React.HTMLAttributes<HTMLElement>) {
   );
 }
 
-function MdImg(props: React.ImgHTMLAttributes<HTMLImageElement>) {
-  const { src = "", alt = "", title } = props;
+// 이미지 + 캡션용 블록 전용 컴포넌트
+export function Figure({
+  src = "",
+  alt = "",
+  title,
+}: {
+  src: string;
+  alt?: string;
+  title?: string;
+}) {
   return (
     <figure className="my-6">
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -236,9 +242,6 @@ export const mdxComponents = {
   pre: Pre,
   code: CodeInline,
 
-  // images
-  img: MdImg,
-
   // extras
   TaskUl,
   details: Details,
@@ -250,4 +253,5 @@ export const mdxComponents = {
   Columns,
   Col,
   Section,
+  Figure,
 };

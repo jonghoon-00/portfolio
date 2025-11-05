@@ -15,6 +15,8 @@ export const PROJECTS: ProjectMetaBase[] = [
       "Zustand",
       "Supabase",
     ],
+    //test
+    mdx: () => import("@/markdown/projects/k-nostalgia.mdx"),
   },
 ] satisfies ProjectMetaBase[];
 

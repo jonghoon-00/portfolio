@@ -1,6 +1,7 @@
-import ClientMDXLoader from "@/components/mdx/ClientMDXLoader";
+import { Prose } from "@/components/mdx/Prose";
 import ProjectModal from "@/components/ui/Modal";
 import { getProjectById } from "@/lib/projects.public";
+import { notFound } from "next/navigation";
 
 export default async function ProjectModalPage({
   params,
@@ -8,13 +9,18 @@ export default async function ProjectModalPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-
   const project = getProjectById(slug);
-  if (!project) return null;
+
+  if (!project) {
+    notFound();
+  }
+  const { default: Mdx } = await project.mdx();
 
   return (
     <ProjectModal title={project.title} accent={project.accent}>
-      <ClientMDXLoader slug={slug as any} project={project} />
+      <Prose>
+        <Mdx />
+      </Prose>
     </ProjectModal>
   );
 }
