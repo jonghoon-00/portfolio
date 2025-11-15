@@ -1,9 +1,8 @@
-// tailwind.config.js
 import typography from "@tailwindcss/typography";
+import type { Config } from "tailwindcss";
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  darkMode: ["class"],
+export default {
+  darkMode: ["class", '[data-theme="dark"]'],
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -13,7 +12,7 @@ module.exports = {
     // 화면 폭 기준
     screens: {
       sm: "640px",
-      md: "768px",
+      md: "768px", // 데스크탑 전환 기준
       lg: "1024px",
       xl: "1280px",
       "2xl": "1536px",
@@ -30,19 +29,6 @@ module.exports = {
         surface: {
           DEFAULT: "rgb(var(--surface) / <alpha-value>)",
           card: "rgb(var(--surface-card) / <alpha-value>)",
-        },
-        brand: {
-          DEFAULT: "#4C7CF3",
-          50: "#EEF3FF",
-          100: "#D9E4FF",
-          200: "#B8CBFF",
-          300: "#94B2FF",
-          400: "#6E96F6",
-          500: "#4C7CF3",
-          600: "#3B6AE0",
-          700: "#3159C4",
-          800: "#2A4AA2",
-          900: "#223B82",
         },
       },
       fontFamily: {
@@ -76,4 +62,4 @@ module.exports = {
     },
   },
   plugins: [typography()],
-};
+} satisfies Config;

@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary-50: #eef3ff;
+  --color-primary-100: #d9e4ff;
+  --color-primary-200: #b8cbff;
+  --color-primary-300: #94b2ff;
+  --color-primary-400: #6e96f6;
+  --color-primary-500: #4c7cf3;
+  --color-primary-600: #3b6ae0;
+  --color-primary-700: #3159c4;
+  --color-primary-800: #2a4aa2;
+  --color-primary-900: #223b82;
+}
+
 /* ========== Light / Dark CSS Variables ========== */
 :root {
   --surface: 248 249 251; /* #f8f9fb */
@@ -50,6 +63,7 @@ html.dark {
     color: rgb(var(--text-strong));
     font-family: var(--font-pretendard), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
+    scrollbar-width: thin;
   }
 
   h1,
@@ -77,23 +91,19 @@ html.dark {
   }
 
   a {
-    color: #3b6ae0;
+    color: var(--text-muted);
     text-underline-offset: 2px;
   }
   a:hover {
     color: #3159c4;
   }
-
-  * {
-    transition: color 0.15s, background-color 0.15s, border-color 0.15s;
-  }
-  .no-theme-transition * {
-    transition: none !important;
-  }
 }
 
 /* ========== Utilities ========== */
 @layer utilities {
+  .header {
+    background-color: rgb(var(--surface));
+  }
   .section {
     padding-block: var(--section-gap);
   }
@@ -311,9 +321,4 @@ html.dark {
   --tw-prose-th-borders: rgb(var(--border));
   --tw-prose-td-borders: rgb(var(--border));
   color: rgb(var(--text-strong));
-}
-
-/* 스크롤바 */
-body {
-  scrollbar-width: thin;
 }
