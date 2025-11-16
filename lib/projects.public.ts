@@ -18,6 +18,38 @@ export const PROJECTS: ProjectMetaBase[] = [
     //test
     mdx: () => import("@/markdown/projects/k-nostalgia.mdx"),
   },
+  {
+    id: PROJECT_IDS.K_NOSTALGIA,
+    title: "향그리움 (K-Nostalgia)",
+    accent: "#BD873F",
+    type: "team",
+    techs: [
+      "Next.js",
+      "TS",
+      "Tailwind",
+      "TanStack Query",
+      "Zustand",
+      "Supabase",
+    ],
+    //test
+    mdx: () => import("@/markdown/projects/k-nostalgia.mdx"),
+  },
+  {
+    id: PROJECT_IDS.K_NOSTALGIA,
+    title: "향그리움 (K-Nostalgia)",
+    accent: "#BD873F",
+    type: "team",
+    techs: [
+      "Next.js",
+      "TS",
+      "Tailwind",
+      "TanStack Query",
+      "Zustand",
+      "Supabase",
+    ],
+    //test
+    mdx: () => import("@/markdown/projects/k-nostalgia.mdx"),
+  },
 ] satisfies ProjectMetaBase[];
 
 // 편의 함수

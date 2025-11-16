@@ -1,27 +1,34 @@
 "use client";
 
-import clsx from "clsx";
 import Link from "next/link";
+import Nav from "./Nav";
 import { ThemeToggle } from "./ThemeToggle";
 
 export default function Header() {
   return (
-    <header
-      className={clsx(
-        "flex items-center justify-between",
-        "px-4 py-3",
-        "border-b dark:border-neutral-200 border-neutral-800"
-      )}
-    >
-      <div className="flex gap-4">
-        <Link href="/" className="font-semibold text-lg">
+    <>
+      <header className="header">
+        {/* 좌측 - 홈버튼 */}
+        <Link
+          href="/"
+          className="font-semibold text-lg"
+          onClick={(e) => {
+            // url 해시 제거
+            window.history.replaceState(null, "", "/");
+            // section 상태 동기화
+            window.dispatchEvent(new HashChangeEvent("hashchange"));
+          }}
+        >
           {/* TODO 추후 수정 */}
-          Jonghoon.dev
+          HOME
         </Link>
-        <ThemeToggle />
-      </div>
-      {/* TODO 각 파트 이동용 NA바 제작 */}
-      <nav className="flex items-center gap-3"> nav바</nav>
-    </header>
+
+        {/* 우측 - nav, 다크모드 버튼 */}
+        <div className="flex items-center gap-4 md:gap-6">
+          <Nav />
+          <ThemeToggle />
+        </div>
+      </header>
+    </>
   );
 }

@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function OtherProjects() {
   return (
-    <section>
-      <h2 className="text-2xl font-semibold mb-4">Other Projects</h2>
+    <section id="other-projects">
+      <h2>Others</h2>
       <ul className="grid md:grid-cols-2 gap-4">
         {otherProjects.map((p) => (
           <li key={p.id} className="rounded-2xl border p-4">

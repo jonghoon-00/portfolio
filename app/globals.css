@@ -23,8 +23,6 @@
   --border: 229 231 235; /* neutral-200 */
   --border-soft: 241 245 249; /* slate-100 */
 
-  /* 카드/섹션 */
-  --section-gap: 88px;
   --card-radius: 12px;
 
   /* ===== Modal tokens ===== */
@@ -40,16 +38,17 @@
 }
 
 html.dark {
-  --surface: 12 13 16; /* #0c0d10 */
-  --surface-card: 17 18 22; /* #111216 */
-  --text-strong: 229 231 235; /* #e5e7eb */
-  --text-muted: 156 163 175; /* #9ca3af */
+  --surface: 20 20 20; /* #141414  */
+  --surface-card: 28 28 28; /* #1c1c1c */
 
-  --border: 48 52 61; /* ~ slate-700 */
-  --border-soft: 31 32 36; /* ~ near card */
+  --text-strong: 235 235 235; /* #ebebeb  */
+  --text-muted: 160 160 160; /* #a0a0a0 */
 
-  --scrollbar-thumb: rgba(255, 255, 255, 0.24);
-  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.36);
+  --border: 70 70 70; /* #464646  */
+  --border-soft: 50 50 50; /* #323232 */
+
+  --scrollbar-thumb: rgba(160, 160, 160, 0.55);
+  --scrollbar-thumb-hover: rgba(200, 200, 200, 0.75);
 }
 
 /* ========== Base ========== */
@@ -65,22 +64,19 @@ html.dark {
     -webkit-font-smoothing: antialiased;
     scrollbar-width: thin;
   }
-
-  h1,
-  h2,
-  h3 {
-    letter-spacing: -0.01em;
-    font-weight: 600;
-  }
   h1 {
     font-size: clamp(28px, 4vw, 40px);
     line-height: 1.15;
+    font-weight: 600;
   }
   h2 {
     font-size: clamp(22px, 3vw, 32px);
     line-height: 1.2;
+    font-weight: 500;
   }
   h3 {
+    letter-spacing: -0.01em;
+    font-weight: 600;
     font-size: clamp(18px, 2.4vw, 24px);
     line-height: 1.25;
   }
@@ -102,61 +98,13 @@ html.dark {
 /* ========== Utilities ========== */
 @layer utilities {
   .header {
+    @apply w-full top-0 z-50 fixed flex items-center justify-between;
+    @apply px-2 md:px-4 py-3;
+    @apply border-b dark:border-neutral-200 border-neutral-800;
     background-color: rgb(var(--surface));
   }
   .section {
-    padding-block: var(--section-gap);
-  }
-
-  /* ---- Modal ---- */
-  .project-modal {
-    background: rgb(var(--surface-card));
-    color: rgb(var(--text-strong));
-    border-radius: var(--card-radius);
-    border: 1px solid rgb(var(--border) / 0.6);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-
-    width: 100%;
-    margin-inline: auto;
-    overflow: auto;
-
-    /* 데스크탑 기본 */
-    max-width: min(var(--modal-max-w-desktop), 92vw);
-    max-height: calc(100dvh - var(--modal-height-desktop-gap));
-    padding: var(--modal-padding-desktop);
-
-    /* Firefox */
-    scrollbar-width: thin; /* auto | thin | none */
-    scrollbar-color: var(--scrollbar-thumb) transparent;
-
-    /* 레이아웃 점프 방지(윈도우) */
-    scrollbar-gutter: stable both-edges;
-  }
-  /* WebKit(Chrome, Edge, Safari) */
-  .project-modal::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  .project-modal::-webkit-scrollbar-track {
-    background: transparent; /* 트랙(배경) 투명 */
-  }
-  .project-modal::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-thumb); /* 얇은 회색(다크모드 대응) */
-    border-radius: 9999px;
-    /* 트랙과 여백이 느껴지도록 투명 보더 */
-    border: 2px solid transparent;
-    background-clip: padding-box;
-  }
-  .project-modal::-webkit-scrollbar-thumb:hover {
-    background-color: var(--scrollbar-thumb-hover);
-  }
-  .project-modal::-webkit-scrollbar-button {
-    width: 0;
-    height: 0;
-    display: none; /* 버튼 숨김 */
-  }
-  .project-modal::-webkit-scrollbar-corner {
-    background: transparent; /* 양 스크롤 만나는 코너도 투명 */
+    padding-block: 1rem;
   }
 
   /* 모바일(sheet) */
@@ -174,15 +122,14 @@ html.dark {
       box-shadow: none;
       overscroll-behavior: contain;
     }
-  }
-
-  /* 프로젝트 상세만 넓게 쓰고 싶을 때 */
-  .project-modal--wide {
-    max-width: min(var(--modal-max-w-desktop-wide), 92vw);
+    .section {
+      padding-block: 0 1rem;
+    }
   }
 
   .card {
     background: rgb(var(--surface-card));
+    padding: 1rem;
     border-radius: var(--card-radius);
     border: 1px solid rgb(var(--border) / 0.6);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
@@ -236,6 +183,61 @@ html.dark {
     background: rgb(var(--surface-card) / 0.6);
     border-color: rgb(var(--border));
     cursor: pointer;
+  }
+
+  /* ---- 모달 ---- */
+  .project-modal {
+    background: rgb(var(--surface-card));
+    color: rgb(var(--text-strong));
+    border-radius: var(--card-radius);
+    border: 1px solid rgb(var(--border) / 0.6);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+
+    width: 100%;
+    margin-inline: auto;
+    overflow: auto;
+
+    /* 데스크탑 기본 */
+    max-width: min(var(--modal-max-w-desktop), 92vw);
+    max-height: calc(100dvh - var(--modal-height-desktop-gap));
+    padding: var(--modal-padding-desktop);
+
+    /* Firefox */
+    scrollbar-width: thin; /* auto | thin | none */
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+
+    /* 레이아웃 점프 방지(윈도우) */
+    scrollbar-gutter: stable both-edges;
+  }
+  .project-modal::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .project-modal::-webkit-scrollbar-track {
+    background: transparent; /* 트랙(배경) 투명 */
+  }
+  .project-modal::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb); /* 얇은 회색(다크모드 대응) */
+    border-radius: 9999px;
+    /* 트랙과 여백이 느껴지도록 투명 보더 */
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  .project-modal::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+  }
+  .project-modal::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none; /* 버튼 숨김 */
+  }
+  .project-modal::-webkit-scrollbar-corner {
+    background: transparent; /* 양 스크롤 만나는 코너도 투명 */
+  }
+
+  /* 프로젝트 상세만 넓게 쓰고 싶을 때 */
+  .project-modal--wide {
+    max-width: min(var(--modal-max-w-desktop-wide), 92vw);
   }
 
   /* 모달 타이포: 모달 내부만 살짝 키워 가독성 보강 */
@@ -302,7 +304,7 @@ html.dark {
   }
 }
 
-/* prose 컬러 변수 유지 */
+/* prose 컬러 변수 */
 .prose {
   --tw-prose-body: rgb(var(--text-strong));
   --tw-prose-headings: rgb(var(--text-strong));
