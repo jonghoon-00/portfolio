@@ -1,4 +1,4 @@
-import { mainProjects } from "@/lib/projects.public";
+import { mainProjects } from "@/lib/data/projects.public";
 import clsx from "clsx";
 import Link from "next/link";
 

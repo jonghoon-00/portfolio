@@ -1,6 +1,6 @@
 import { Prose } from "@/components/mdx/Prose";
 import { PROJECT_IDS } from "@/constants/projectIds";
-import { getProjectById } from "@/lib/projects.public";
+import { getProjectById } from "@/lib/data/projects.public";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 

@@ -1,6 +1,6 @@
 import { Prose } from "@/components/mdx/Prose";
 import ProjectModal from "@/components/ui/Modal";
-import { getProjectById } from "@/lib/projects.public";
+import { getProjectById } from "@/lib/data/projects.public";
 import { notFound } from "next/navigation";
 
 export default async function ProjectModalPage({
