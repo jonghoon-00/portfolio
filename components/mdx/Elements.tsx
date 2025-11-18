@@ -3,6 +3,7 @@ import React from "react";
 
 import { Col, Columns } from "@/components/layout/Columns";
 import { Section } from "@/components/layout/Section";
+import CldImage from "@/components/ui/CldImage";
 
 function H1(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
@@ -253,5 +254,6 @@ export const mdxComponents = {
   Columns,
   Col,
   Section,
+  CldImage,
   Figure,
 };
