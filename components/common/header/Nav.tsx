@@ -1,64 +1,56 @@
 "use client";
 
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import React from "react";
 
-import { scrollToSection } from "@/lib/scroll";
-
-const NAV_ITEMS = [
-  { id: "work", label: "Work" },
-  { id: "main-projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
-];
+import { SECTIONS } from "@/constants/sections";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
 
 export default function Nav() {
-  const HEADER_OFFSET = 54;
+  const HEADER_HEIGHT = 52.67; // 헤더 높이만큼 오프셋
 
-  const [section, setSection] = useState("");
+  const activeId = useScrollSpy(
+    SECTIONS.map((s) => s.id),
+    HEADER_HEIGHT
+  );
 
-  useEffect(() => {
-    const syncSectionWithHash = () => {
-      const hash = window.location.hash;
-      const current = hash.replace("#", "");
+  // 함수를 반환하는 형태
+  const handleClick = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
 
-      if (current) {
-        setSection(current);
-      } else {
-        setSection(""); // 해시 없으면 강조 제거
-      }
-    };
+    const el = document.getElementById(id);
+    if (!el) return;
 
-    syncSectionWithHash();
-    window.addEventListener("hashchange", syncSectionWithHash);
+    const rect = el.getBoundingClientRect();
+    const scrollTop = window.pageYOffset + rect.top - HEADER_HEIGHT;
 
-    return () => {
-      window.removeEventListener("hashchange", syncSectionWithHash);
-    };
-  }, []);
-
-  const handleClick = (id: string) => {
-    setSection(id); // 클릭 즉시 active 반영
-    scrollToSection(id, HEADER_OFFSET);
+    window.scrollTo({
+      top: scrollTop,
+      behavior: "smooth",
+    });
   };
 
   return (
     <nav>
       <ul className="flex gap-2">
-        {NAV_ITEMS.map((i) => (
-          <li key={i.id}>
-            <button
-              onClick={() => handleClick(i.id)}
-              className={clsx(
-                "md:text-base text-sm",
-                "cursor-pointer",
-                "hover:text-primary-500",
-                section === i.id && "text-primary-500 font-semibold"
-              )}
-            >
-              {i.label}
-            </button>
-          </li>
-        ))}
+        {SECTIONS.map((i) => {
+          const isActive = activeId === i.id;
+          return (
+            <li key={i.id}>
+              <button
+                onClick={() => handleClick(i.id)}
+                className={clsx(
+                  "md:text-base text-sm",
+                  "cursor-pointer",
+                  "hover:text-primary-500",
+                  isActive && "text-primary-500 font-semibold"
+                )}
+              >
+                {i.label}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

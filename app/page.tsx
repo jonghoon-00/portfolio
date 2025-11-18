@@ -18,8 +18,10 @@ export default function Home() {
         )}
       >
         <Work />
-        <MainProjects />
-        <OtherProjects />
+        <section id="projects">
+          <MainProjects />
+          <OtherProjects />
+        </section>
         <Contact />
       </main>
     </>

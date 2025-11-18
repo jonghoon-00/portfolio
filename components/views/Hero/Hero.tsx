@@ -30,6 +30,7 @@ const ARROW_DELAY = TEXT_DURATION + TEXT_STAGGER * (TEXT_ITEMS - 1) + 0.15; // ì
 export default function Hero() {
   return (
     <section
+      id="hero"
       className={clsx(
         "relative min-h-screen",
         "bg-hero-light bg-hero-dark hero-spotlights"
