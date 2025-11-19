@@ -2,6 +2,7 @@
     Tailwind (v4) import
    ======================================== */
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* ========================================
     Theme Colors (Tailwind @theme)
