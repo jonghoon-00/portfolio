@@ -7,7 +7,7 @@ import { SECTIONS } from "@/constants/sections";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 
 export default function Nav() {
-  const HEADER_HEIGHT = 52.67; // 헤더 높이만큼 오프셋
+  const HEADER_HEIGHT = 53; // 헤더 높이만큼 오프셋
 
   const activeId = useScrollSpy(
     SECTIONS.map((s) => s.id),
@@ -38,7 +38,7 @@ export default function Nav() {
           return (
             <li key={i.id}>
               <button
-                onClick={() => handleClick(i.id)}
+                onClick={handleClick(i.id)}
                 className={clsx(
                   "md:text-base text-sm",
                   "cursor-pointer",
