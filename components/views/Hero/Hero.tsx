@@ -26,7 +26,7 @@ const item = {
   visible: { opacity: 1, y: 0 },
 };
 
-const ARROW_DELAY = TEXT_DURATION + TEXT_STAGGER * (TEXT_ITEMS - 1) + 0.15; // 살짝 여유를 +0.15
+const ARROW_DELAY = TEXT_DURATION + TEXT_STAGGER * (TEXT_ITEMS - 1) + 0.15;
 export default function Hero() {
   return (
     <section
@@ -45,42 +45,26 @@ export default function Hero() {
             animate="visible"
             className="w-full md:max-w-[800px] md:translate-y-[-16vh]"
           >
-            <motion.p
-              variants={item}
-              className="text-xs md:text-sm tracking-[0.22em] uppercase"
-              style={{ color: "var(--text-muted)" }}
-            >
+            <motion.p variants={item} className="tracking-[0.22em] uppercase">
               Frontend Engineer
             </motion.p>
 
-            <motion.h1
-              variants={item}
-              className="mt-4 text-3xl md:text-[40px] leading-tight font-semibold"
-              style={{ color: "var(--text-strong)" }}
-            >
-              디지털 경험을 설계하는 프론트엔드, 이종훈
+            <motion.h1 variants={item} className="mt-4">
+              프론트엔드 엔지니어, 이종훈
             </motion.h1>
 
             <motion.p
               variants={item}
-              className="mt-4 text-sm md:text-base md:mt-7"
-              style={{ color: "var(--text-muted)" }}
+              className=""
+              // style={{ color: "var(--text-muted)" }}
             >
-              읽기 좋은 코드와 안정적인 UI를 고민합니다.
+              읽기 좋은 코드로 안정적인 UI를 만듭니다.
             </motion.p>
-            <motion.p
-              variants={item}
-              className="mt-4 text-sm md:text-base md:mt-5"
-              style={{ color: "red" }}
-            >
+            <motion.p variants={item} className="">
+              디테일을 놓치지 않고, 사용자 경험을 우선합니다.
+            </motion.p>
+            <motion.p variants={item} className="" style={{ color: "red" }}>
               TODO : 소개 문구 한줄 추가 + 기술 스택 나열
-            </motion.p>
-            <motion.p
-              variants={item}
-              className="mt-4 text-sm md:text-base md:mt-5"
-              style={{ color: "red" }}
-            >
-              TODO : 글 배치,크기 수정(특히 모바일)
             </motion.p>
           </motion.div>
         </div>
