@@ -2,7 +2,6 @@ import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 
 export default {
-  // darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,7 +11,7 @@ export default {
     // 화면 폭 기준
     screens: {
       sm: "640px",
-      md: "768px", // 데스크탑 전환 기준
+      md: "768px",
       lg: "1024px",
       xl: "1280px",
       "2xl": "1536px",

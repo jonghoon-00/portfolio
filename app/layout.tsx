@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import React from "react";
 import "./globals.css";
 
@@ -14,29 +13,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal, // 병렬 슬롯. @modal
+  modal,
 }: Readonly<{
   children: React.ReactNode;
   modal?: React.ReactNode;
 }>) {
-  // script : 저장된 theme 읽고, 없으면 light
   return (
     <html
       lang="ko"
       className={`${pretendard.variable}`}
       suppressHydrationWarning
     >
-      <head>
-        <Script id="theme-init" strategy="beforeInteractive">
-          {`(function(){
-            try {
-              var root = document.documentElement;
-              var t = localStorage.getItem('theme') || 'light';
-              if (t === 'dark') root.classList.add('dark');
-            } catch (e) {}
-          })();`}
-        </Script>
-      </head>
       <body>
         <Header />
         {children}

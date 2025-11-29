@@ -11,3 +11,11 @@ export const pretendard = localFont({
   display: "swap",
   variable: "--font-pretendard",
 });
+
+import { Sora } from "next/font/google";
+
+export const logoFont = Sora({
+  subsets: ["latin"],
+  weight: ["700", "800"],
+  variable: "--font-logo",
+});

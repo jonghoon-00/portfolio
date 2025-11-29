@@ -40,10 +40,9 @@ export default function Nav() {
               <button
                 onClick={handleClick(i.id)}
                 className={clsx(
-                  "md:text-base text-sm",
                   "cursor-pointer",
-                  "hover:text-primary-500",
-                  isActive && "text-primary-500 font-semibold"
+                  "nav-link",
+                  isActive && "nav-link--active"
                 )}
               >
                 {i.label}
