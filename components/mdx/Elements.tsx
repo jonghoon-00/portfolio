@@ -8,7 +8,11 @@ import CldImage from "@/components/ui/CldImage";
 function H1(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h1
-      className="mt-2 mb-3 text-3xl md:text-[2rem] font-bold leading-tight tracking-[-0.01em]"
+      className={clsx(
+        "mt-6 mb-4",
+        "font-bold tracking-[-0.02em]",
+        "text-[clamp(28px,4.4vw,40px)] leading-[1.15]"
+      )}
       {...props}
     />
   );
@@ -16,7 +20,11 @@ function H1(props: React.HTMLAttributes<HTMLHeadingElement>) {
 function H2(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2
-      className="mt-10 mb-3 text-2xl md:text-[1.5rem] font-semibold leading-snug tracking-[-0.01em]"
+      className={clsx(
+        "mt-10 mb-3",
+        "font-semibold tracking-[-0.02em]",
+        "text-[clamp(22px,3.4vw,32px)] leading-[1.20]"
+      )}
       {...props}
     />
   );
@@ -24,21 +32,29 @@ function H2(props: React.HTMLAttributes<HTMLHeadingElement>) {
 function H3(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      className="mt-8 mb-2 text-xl md:text-[1.25rem] font-semibold leading-snug"
+      className={clsx(
+        "mt-8 mb-2",
+        "font-semibold tracking-[-0.01em]",
+        "text-[clamp(18px,2.6vw,24px)] leading-[1.25]"
+      )}
       {...props}
     />
   );
 }
 function H4(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h4 className="mt-6 mb-2 text-lg font-semibold leading-snug" {...props} />
+    <h4 className="mt-6 mb-2 font-semibold text-lg leading-[1.3]" {...props} />
   );
 }
 
 function P(props: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className="my-2 leading-7 text-[0.98rem] md:text-base text-[rgb(var(--text-strong))]"
+      className={clsx(
+        "my-3",
+        "text-[clamp(15px,1.1vw,17px)] leading-[1.70]",
+        "text-[rgb(var(--text-strong))]"
+      )}
       {...props}
     />
   );
@@ -47,28 +63,37 @@ function P(props: React.HTMLAttributes<HTMLParagraphElement>) {
 function A(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
     <a
-      className="underline underline-offset-[3px] decoration-[1.5px] hover:opacity-90"
+      className="text-[var(--link)] underline underline-offset-[0.2em] hover:text-[var(--link-hover)]"
       {...props}
     />
   );
 }
 
 function Ul(props: React.HTMLAttributes<HTMLUListElement>) {
-  return <ul className="my-2 pl-6 list-disc space-y-1" {...props} />;
+  return <ul className="my-3 pl-6 list-disc space-y-[0.35rem]" {...props} />;
 }
 function Ol(props: React.HTMLAttributes<HTMLOListElement>) {
-  return <ol className="my-2 pl-6 list-decimal space-y-1" {...props} />;
+  return <ol className="my-3 pl-6 list-decimal space-y-[0.35rem]" {...props} />;
 }
+
 function Li(props: React.LiHTMLAttributes<HTMLLIElement>) {
   return (
-    <li className="marker:text-neutral-400 leading-7 [&>p]:my-0" {...props} />
+    <li
+      className="marker:text-neutral-400 leading-[1.65] [&>p]:my-0"
+      {...props}
+    />
   );
 }
 
 function Blockquote(props: React.HTMLAttributes<HTMLQuoteElement>) {
   return (
     <blockquote
-      className="my-4 border-l-4 pl-4 text-[0.98rem] md:text-base italic text-(--text-muted)"
+      className={clsx(
+        "my-5 pl-4 border-l-4",
+        "italic",
+        "text-[rgb(var(--text-muted))]",
+        "border-[rgb(var(--border))]"
+      )}
       {...props}
     />
   );
@@ -76,19 +101,14 @@ function Blockquote(props: React.HTMLAttributes<HTMLQuoteElement>) {
 
 function Hr(props: React.HTMLAttributes<HTMLHRElement>) {
   return (
-    <hr
-      className="my-4 border-t border-neutral-200/50 dark:border-neutral-700/60"
-      {...props}
-    />
+    <hr className="my-6 border-t border-[rgb(var(--border))]" {...props} />
   );
 }
-
-/* ========= Code (inline & block) ========= */
 
 function CodeInline(props: React.HTMLAttributes<HTMLElement>) {
   return (
     <code
-      className="rounded-[6px] px-1.5 py-[2px] text-[0.92em] bg-neutral-100 dark:bg-neutral-800/80"
+      className="rounded-md px-[4px] py-[2px] bg-[rgb(var(--surface-card))] text-[0.90em]"
       {...props}
     />
   );
@@ -97,16 +117,14 @@ function Pre(props: React.HTMLAttributes<HTMLPreElement>) {
   return (
     <pre
       className={clsx(
-        "my-4 w-full overflow-x-auto rounded-xl p-4",
-        "bg-neutral-950 text-neutral-100 dark:bg-neutral-900",
-        "text-[0.90rem] leading-6"
+        "my-6 w-full overflow-x-auto rounded-xl p-4",
+        "bg-neutral-950 dark:bg-neutral-900",
+        "text-neutral-100 text-[0.9rem] leading-6"
       )}
       {...props}
     />
   );
 }
-
-/* ========= Inline styles ========= */
 
 function Strong(props: React.HTMLAttributes<HTMLElement>) {
   return <strong className="font-semibold" {...props} />;
@@ -115,26 +133,25 @@ function Em(props: React.HTMLAttributes<HTMLElement>) {
   return <em className="italic" {...props} />;
 }
 function Del(props: React.HTMLAttributes<HTMLElement>) {
-  return <del className="opacity-80" {...props} />;
+  return <del className="opacity-70" {...props} />;
 }
 
-/* ========= Callout ========= */
 type CalloutType = "note" | "tip" | "info" | "warn" | "danger";
 
 const calloutStyle: Record<CalloutType, string> = {
-  note: "bg-neutral-50 dark:bg-neutral-800/60",
-  tip: "bg-emerald-50 dark:bg-emerald-900/20",
-  info: "bg-sky-50 dark:bg-sky-900/20",
-  warn: "bg-amber-50 dark:bg-amber-900/20",
-  danger: "bg-rose-50 dark:bg-rose-900/20",
+  note: "bg-neutral-50 dark:bg-neutral-800/40",
+  tip: "bg-emerald-50/70 dark:bg-emerald-900/20",
+  info: "bg-sky-50/70 dark:bg-sky-900/20",
+  warn: "bg-amber-50/70 dark:bg-amber-900/20",
+  danger: "bg-rose-50/70 dark:bg-rose-900/20",
 };
 
 export function Callout({
   type = "note",
   icon,
-  children,
-  className,
   title,
+  className,
+  children,
 }: {
   type?: CalloutType;
   icon?: string;
@@ -145,52 +162,45 @@ export function Callout({
   return (
     <div
       className={clsx(
-        "my-4 flex gap-3 rounded-xl p-3 border border-black/5 dark:border-white/10",
+        "my-5 flex gap-3 rounded-xl p-4 border border-[rgb(var(--border))]/40",
         calloutStyle[type],
         className
       )}
     >
-      <div className="select-none text-lg leading-none pt-0.5">
-        {icon ?? "💡"}
-      </div>
+      <div className="text-lg pt-0.5 select-none">{icon ?? "💡"}</div>
       <div className="min-w-0">
-        {title ? <div className="font-semibold mb-1">{title}</div> : null}
-        <div className="[&>p]:my-0">{children}</div>
+        {title && <div className="font-semibold mb-1">{title}</div>}
+        <div className="[&>p]:my-0 leading-[1.65]">{children}</div>
       </div>
     </div>
   );
 }
 
-/* ========= Checkbox list (Notion-style task list) =========
-   MDX의 task list는 <li><input type="checkbox" /></li> 형태로 렌더됨.
-   아래 li 스타일이 이를 자연스럽게 보이게 해줌.
-*/
 function TaskUl(props: React.HTMLAttributes<HTMLUListElement>) {
-  // 선택적으로 사용하려면 mdx에서 <TaskUl>로 감싸도 되고,
-  // 일반 ul에도 체크박스가 있으면 브라우저가 렌더해줌.
-  return <ul className="my-2 pl-1 space-y-1" {...props} />;
+  return <ul className="my-3 pl-1 space-y-[0.3rem]" {...props} />;
 }
 
 function Details(props: React.HTMLAttributes<HTMLDetailsElement>) {
-  // 토글(접기/펼치기) — Notion 토글 유사
   return (
-    <details className="my-2 rounded-lg border border-neutral-200/60 dark:border-neutral-700/60 p-3">
-      {props.children}
-    </details>
-  );
-}
-function Summary(props: React.HTMLAttributes<HTMLElement>) {
-  return (
-    <summary className="cursor-pointer font-medium [&::-webkit-details-marker]:hidden before:mr-2 before:content-['▸'] open:before:content-['▾']">
-      {props.children}
-    </summary>
+    <details
+      className="my-3 rounded-lg p-3 border border-[rgb(var(--border))]/50"
+      {...props}
+    />
   );
 }
 
-// 이미지 + 캡션용 블록 전용 컴포넌트
+function Summary(props: React.HTMLAttributes<HTMLElement>) {
+  return (
+    <summary
+      className="cursor-pointer font-medium [&::-webkit-details-marker]:hidden before:mr-2 before:content-['▸'] open:before:content-['▾']"
+      {...props}
+    />
+  );
+}
+
 export function Figure({
-  src = "",
-  alt = "",
+  src,
+  alt,
   title,
 }: {
   src: string;
@@ -199,13 +209,12 @@ export function Figure({
 }) {
   return (
     <figure className="my-6">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt={alt} className="rounded-xl shadow-sm" />
-      {title ? (
-        <figcaption className="text-sm text-muted-foreground mt-1">
+      {title && (
+        <figcaption className="text-sm text-[rgb(var(--text-muted))] mt-1">
           {title}
         </figcaption>
-      ) : null}
+      )}
     </figure>
   );
 }
@@ -219,7 +228,6 @@ export function Accent({ children }: { children: React.ReactNode }) {
 }
 
 export const mdxComponents = {
-  // headings & text
   h1: H1,
   h2: H2,
   h3: H3,
@@ -229,28 +237,17 @@ export const mdxComponents = {
   strong: Strong,
   em: Em,
   del: Del,
-
-  // lists
   ul: Ul,
   ol: Ol,
   li: Li,
-
-  // quote / divider
   blockquote: Blockquote,
   hr: Hr,
-
-  // code
   pre: Pre,
   code: CodeInline,
-
-  // extras
   TaskUl,
   details: Details,
   summary: Summary,
-
-  Accent, // 프로젝트 별 강조색
-
-  // 커스텀 컴포넌트
+  Accent,
   Columns,
   Col,
   Section,

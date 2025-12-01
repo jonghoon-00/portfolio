@@ -1,28 +1,33 @@
 "use client";
 
 import clsx from "clsx";
-import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 import ScrollIndicator from "./ScrollIndicator";
 import SkillsBlock from "./SkillsBlock";
 
+interface HeroProps {
+  onHeroComplete?: () => void;
+}
+
 const TEXT_DURATION = 1;
 const TEXT_STAGGER = 0.7;
 const TEXT_ITEMS = 3;
 
-const container: Variants = {
-  hidden: { opacity: 0, y: 16 },
+const container = {
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: TEXT_DURATION,
+      duration: 0.8,
       ease: "easeOut",
-      staggerChildren: TEXT_STAGGER,
+      when: "beforeChildren",
+      staggerChildren: 0.08,
     },
   },
-};
+} as const;
 const item = {
   hidden: { opacity: 0, y: 12 },
   visible: { opacity: 1, y: 0 },
@@ -30,15 +35,15 @@ const item = {
 
 const DELAY = TEXT_DURATION + TEXT_STAGGER * (TEXT_ITEMS - 1) - 0.3;
 
-export default function Hero() {
+export default function Hero({ onHeroComplete }: HeroProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]); // 아래로 갈수록 투명
-  const translateY = useTransform(scrollYProgress, [0, 1], [0, -16]);
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.25], [1, 1, 0]);
+  const translateY = useTransform(scrollYProgress, [0, 1], [0, -24]);
   return (
     <section id="hero" className={clsx("relative section-hero")} ref={ref}>
       <div
@@ -82,7 +87,7 @@ export default function Hero() {
       </div>
 
       {/* 모바일: 인디케이터 / 데스크탑: 스킬 블록 */}
-      <SkillsBlock delay={DELAY} />
+      <SkillsBlock delay={DELAY} onHeroComplete={onHeroComplete} />
       <ScrollIndicator delay={DELAY} />
     </section>
   );

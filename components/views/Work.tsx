@@ -1,106 +1,180 @@
+// Work.tsx
 "use client";
 
-import { WORKS } from "@/lib/data/work.public";
-import { motion } from "framer-motion";
+import { Col, Columns } from "@/components/layout/Columns";
+import { WORK_ITEMS } from "@/lib/data/work.public";
+import clsx from "clsx";
+import { motion, useAnimationControls, useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
 
-export default function Work() {
-  const containerVariants = {
-    hidden: { opacity: 0, y: 24 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-        when: "beforeChildren",
-        staggerChildren: 0.08,
-      },
-    },
-  } as const;
+type WorkProps = {
+  heroDone: boolean;
+};
 
-  const leftVariants = {
-    hidden: { opacity: 0, x: -16 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.45, ease: "easeOut" },
+const containerVariants = {
+  hidden: { opacity: 0, y: 2 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.15,
+      ease: "easeOut",
+      when: "beforeChildren",
+      staggerChildren: 0.06,
     },
-  } as const;
+  },
+} as const;
 
-  const rightVariants = {
-    hidden: { opacity: 0, x: 16 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.45, ease: "easeOut" },
-    },
-  } as const;
+// 왼쪽 컬럼 – 좀 더 빠르게
+const leftVariants = {
+  hidden: { opacity: 0, x: -14 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.35, ease: "easeOut" },
+  },
+} as const;
+
+// 오른쪽 컬럼 – 약간 늦게 + 부드럽게
+const rightVariants = {
+  hidden: { opacity: 0, x: 18 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.5, ease: "easeOut", delay: 0.08 },
+  },
+} as const;
+
+export default function Work({ heroDone }: WorkProps) {
+  const controls = useAnimationControls();
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(ref, { amount: 0.25, once: true });
+
+  // heroDone + inView 둘 다 true일 때만 visible로 전환
+  useEffect(() => {
+    if (heroDone && inView) {
+      controls.start("visible");
+    }
+  }, [heroDone, inView, controls]);
 
   return (
-    <>
-      <section id="work" className="section-work py-16">
-        <div className="max-w-5xl mx-auto px-2 md:px-4">
-          <p className="text-xs font-medium tracking-[0.18em] mb-2">
-            실서비스 환경에서 다룬 첫 프론트엔드 경험
-          </p>
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
-            WORK EXPERIENCE
-          </h2>
-          <motion.div
-            id="work"
-            className="scroll-mt-24 py-16 md:py-12"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={containerVariants}
-          >
-            {/* 섹션 타이틀 */}
-            {/* <motion.header
-          className="mb-8 space-y-2"
-          variants={{
-            hidden: { opacity: 0, y: 10 },
-            visible: { opacity: 1, y: 0 },
-          }}
+    <section id="work" className="section-work py-16">
+      <div className="max-w-5xl mx-auto px-2 md:px-4">
+        {/* 헤더 – 살짝만 페이드업 */}
+        {/* heroDone + inView 조건 충족 시점부터 재생 */}
+        <motion.header
+          className="space-y-2"
+          initial={{ opacity: 0, y: 10 }}
+          animate={heroDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
         >
+          <h2 className="font-semibold tracking-tight text-[clamp(22px,2.5vw,28px)]">
+            Work experience
+          </h2>
+          <p className="text-sm text-[rgb(var(--text-muted))]">
+            실서비스 환경에서 다룬 첫 프론트엔드 경험입니다.
+          </p>
+        </motion.header>
 
-        </motion.header> */}
-
-            {/* 2컬럼 레이아웃 */}
-            {WORKS.map(({ id, company, role, period, Mdx }) => (
-              <div
-                key={company + period}
-                className="grid gap-6 md:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]"
+        <motion.div
+          ref={ref}
+          className="scroll-mt-24 py-14 md:py-12 space-y-10"
+          initial="hidden"
+          animate={controls}
+          variants={containerVariants}
+        >
+          {WORK_ITEMS.map(
+            ({ id, period, company, role, summary, duties, learnings }) => (
+              <motion.section
+                key={id}
+                className="py-6 border-b border-[rgb(var(--border))]/60 last:border-b-0"
+                variants={containerVariants}
               >
-                {/* 왼쪽 타임라인/메타 정보 */}
-                <motion.div
-                  className="relative flex flex-col gap-3 border-l border-neutral-200 pl-4 text-sm dark:border-neutral-800 md:pl-6"
-                  variants={leftVariants}
+                <Columns
+                  cols={2}
+                  equalCols={false}
+                  gap="gap-8 md:gap-10"
+                  className="md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]"
                 >
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium tracking-[0.22em]">
-                      {period}
-                    </p>
-                    <p className="text-sm font-semibold">{company}</p>
-                    <p className="text-xs font-medium ">{role}</p>
-                  </div>
+                  {/* LEFT: meta + 요약 */}
+                  <Col>
+                    <motion.div variants={leftVariants} className="space-y-4">
+                      <div className="work-meta">
+                        <span className="work-meta-dot" />
+                        <div className="space-y-1.5 text-sm md:text-[0.96rem]">
+                          <p className="text-xs font-semibold tracking-[0.22em] text-[rgb(var(--text-muted))]">
+                            {period}
+                          </p>
+                          <p className="text-[1.25rem] font-semibold">
+                            {company}
+                          </p>
+                          <p className="text-sm text-[rgb(var(--text-muted))]">
+                            {role}
+                          </p>
+                        </div>
+                      </div>
 
-                  <p className=" text-xs  md:block">
-                    Java/Spring 기반 서비스를 다루며 프론트엔드 동작을 실제
-                    트래픽 환경에서 검증했습니다.
-                  </p>
-                </motion.div>
+                      <p
+                        className={clsx(
+                          "text-[clamp(15px,1vw,16px)]",
+                          "leading-[1.65]"
+                        )}
+                      >
+                        {summary}
+                      </p>
+                    </motion.div>
+                  </Col>
 
-                {/* 오른쪽 디테일 카드 */}
-                <motion.div variants={rightVariants} className="card">
-                  <div className="prose prose-sm md:prose-base prose-neutral dark:prose-invert max-w-none">
-                    <Mdx />
-                  </div>
-                </motion.div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-    </>
+                  {/* RIGHT: 담당 업무 / 경험 */}
+                  <Col>
+                    <motion.div
+                      variants={rightVariants}
+                      className={clsx(
+                        "mt-6 pt-6 border-t border-[rgb(var(--border))]/60",
+                        "md:mt-0 md:pt-0 md:pl-10 md:border-t-0 md:border-l"
+                      )}
+                    >
+                      <div className="space-y-8">
+                        {/* 담당 업무 */}
+                        <section>
+                          <p className="section-label">담당 업무</p>
+                          <ul
+                            className={clsx(
+                              "mt-3 pl-5 list-disc",
+                              "space-y-2.5",
+                              "text-[clamp(15px,0.9vw,16px)] leading-[1.65]"
+                            )}
+                          >
+                            {duties.map((duty) => (
+                              <li key={duty}>{duty}</li>
+                            ))}
+                          </ul>
+                        </section>
+
+                        {/* 경험 */}
+                        <section>
+                          <p className="section-label">경험</p>
+                          <ul
+                            className={clsx(
+                              "mt-3 pl-5 list-disc",
+                              "space-y-2.5",
+                              "text-[clamp(15px,0.9vw,16px)] leading-[1.65]"
+                            )}
+                          >
+                            {learnings.map((item) => (
+                              <li key={item}>{item}</li>
+                            ))}
+                          </ul>
+                        </section>
+                      </div>
+                    </motion.div>
+                  </Col>
+                </Columns>
+              </motion.section>
+            )
+          )}
+        </motion.div>
+      </div>
+    </section>
   );
 }

@@ -108,7 +108,7 @@
     letter-spacing: -0.02em;
   }
   h2 {
-    font-size: clamp(22px, 3vw, 32px);
+    font-size: clamp(22px, 2.5vw, 28px);
     line-height: 1.2;
     font-weight: 500;
     letter-spacing: -0.02em;
@@ -121,10 +121,9 @@
   }
 
   p {
-    font-size: clamp(15px, 1.1vw, 17px);
-    line-height: 1.7;
+    font-size: clamp(15px, 1vw, 16px);
+    line-height: 1.65;
   }
-
   .muted,
   .text-muted {
     color: rgb(var(--text-muted));
@@ -154,12 +153,9 @@
     @apply fixed top-0 w-full z-40;
     background: linear-gradient(
       to bottom,
-      rgb(var(--surface) / 0.97),
-      rgb(var(--surface) / 0.9)
+      rgb(var(--surface)),
+      rgb(var(--surface))
     );
-
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
 
     border-bottom: 1px solid rgb(var(--border) / 0.7);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
@@ -254,6 +250,39 @@
   }
   .section-contact {
     background-color: rgb(var(--bg-contact));
+  }
+
+  /* 부제목 */
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: rgb(var(--text-muted));
+    text-transform: uppercase;
+  }
+
+  /* Work meta(기간/회사/역할) 수직 라인 + 점 포인트 */
+  .work-meta {
+    position: relative;
+    padding-left: 1.25rem; /* 점 + 라인 여백 */
+  }
+  .work-meta::before {
+    content: "";
+    position: absolute;
+    left: 0.2rem;
+    top: 0.25rem;
+    bottom: 0.25rem;
+    width: 1px;
+    background-color: rgb(var(--border) / 0.8);
+  }
+  .work-meta-dot {
+    position: absolute;
+    left: 0;
+    top: 0.4rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background-color: rgb(var(--nav-active));
   }
 }
 /* ------------------------------

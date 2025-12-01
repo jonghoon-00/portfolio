@@ -1,3 +1,4 @@
+// components/layout/Columns.tsx
 import clsx from "clsx";
 import React from "react";
 
@@ -6,7 +7,12 @@ interface ColumnsProps {
   cols?: 2 | 3;
   className?: string;
   gap?: string; // 'gap-4' 같은 Tailwind 유틸 전달용
+
+  //true : md에서 균등 컬럼 (기본 동작)
+  //false: grid-cols-1만 적용하고, md 이상 템플릿은 className에서 직접 지정
+  equalCols?: boolean;
 }
+
 interface ColProps {
   children: React.ReactNode;
   className?: string;
@@ -17,6 +23,7 @@ export function Columns({
   cols = 2,
   className,
   gap = "gap-4",
+  equalCols = true,
 }: ColumnsProps) {
   const arr = React.Children.toArray(children).filter(Boolean);
   const colCount = arr.filter(
@@ -31,9 +38,10 @@ export function Columns({
     }
   }
 
-  // 프로덕션 fallback: Col이 없으면 그냥 children을 단일 컬럼으로 wrap
-  const gridCols =
-    cols === 3 ? "grid-cols-1 md:grid-cols-3" : "grid-cols-1 md:grid-cols-2";
+  const baseCols = "grid-cols-1"; // 모바일은 항상 1열
+  const equalMdCols = cols === 3 ? "md:grid-cols-3" : "md:grid-cols-2";
+
+  const gridCols = equalCols ? `${baseCols} ${equalMdCols}` : baseCols;
 
   return (
     <div className={clsx("grid", gridCols, gap, className)}>

@@ -5,9 +5,13 @@ import { motion } from "framer-motion";
 
 interface SkillsBlockProps {
   delay: number;
+  onHeroComplete?: () => void;
 }
 
-export default function SkillsBlock({ delay }: SkillsBlockProps) {
+export default function SkillsBlock({
+  delay,
+  onHeroComplete,
+}: SkillsBlockProps) {
   const skills = [
     "React",
     "TypeScript",
@@ -49,6 +53,7 @@ export default function SkillsBlock({ delay }: SkillsBlockProps) {
         duration: 0.4,
         ease: "easeOut",
       }}
+      onAnimationComplete={onHeroComplete}
     >
       <div
         className={clsx(
