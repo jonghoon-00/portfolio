@@ -198,6 +198,7 @@
         rgb(var(--bg-hero-base)) 40%,
         rgb(var(--bg-hero-bottom)) 100%
       );
+    /* padding: 4rem 0; */
   }
 
   .section-hero::after {
@@ -237,21 +238,41 @@
       rgb(var(--bg-work)) 0%,
       rgb(var(--bg-work)) 100%
     );
+    padding: 4rem 0;
   }
   .section-projects {
     background: linear-gradient(
       to bottom,
       rgb(var(--bg-projects)) 0%,
-      rgb(var(--bg-projects)) 100%
+      rgb(var(--bg-projects)) 60%,
+      rgb(var(--bg-others)) 100%
     );
-  }
-  .section-others {
-    background-color: rgb(var(--bg-others));
+    @apply py-3 md:py-14;
   }
   .section-contact {
     background-color: rgb(var(--bg-contact));
+    padding: 4rem 0;
   }
 
+  .section-title {
+    font-size: clamp(22px, 2.5vw, 28px);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    --tw-tracking: -0.025rem;
+    letter-spacing: -0.025rem;
+  }
+  .title-lead {
+    max-width: 48rem;
+    font-size: 0.875rem; /* 14px */
+    color: rgb(var(--text-muted));
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18rem;
+    color: rgb(var(--text-muted));
+  }
   /* 부제목 */
   .section-label {
     font-size: 0.72rem;

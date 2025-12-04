@@ -1,4 +1,3 @@
-// Work.tsx
 "use client";
 
 import { Col, Columns } from "@/components/layout/Columns";
@@ -6,6 +5,7 @@ import { WORK_ITEMS } from "@/lib/data/work.public";
 import clsx from "clsx";
 import { motion, useAnimationControls, useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { SectionDivider } from "../ui/SectionDevider";
 
 type WorkProps = {
   heroDone: boolean;
@@ -58,7 +58,7 @@ export default function Work({ heroDone }: WorkProps) {
   }, [heroDone, inView, controls]);
 
   return (
-    <section id="work" className="section-work py-16">
+    <section id="work" className="section-work">
       <div className="max-w-5xl mx-auto px-2 md:px-4">
         {/* 헤더 – 살짝만 페이드업 */}
         {/* heroDone + inView 조건 충족 시점부터 재생 */}
@@ -68,17 +68,17 @@ export default function Work({ heroDone }: WorkProps) {
           animate={heroDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <h2 className="font-semibold tracking-tight text-[clamp(22px,2.5vw,28px)]">
-            Work experience
-          </h2>
-          <p className="text-sm text-[rgb(var(--text-muted))]">
+          <p className="eyebrow ml-1">Work Experience</p>
+          <h2 className="section-title">실무 경험</h2>
+          <p className="title-lead">
             실서비스 환경에서 다룬 첫 프론트엔드 경험입니다.
           </p>
+          <SectionDivider />
         </motion.header>
 
         <motion.div
           ref={ref}
-          className="scroll-mt-24 py-14 md:py-12 space-y-10"
+          className="scroll-mt-24 py-6 md:pt-4 space-y-10"
           initial="hidden"
           animate={controls}
           variants={containerVariants}

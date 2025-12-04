@@ -1,5 +1,5 @@
 import { Prose } from "@/components/mdx/Prose";
-import ProjectModal from "@/components/ui/Modal";
+import ProjectModal from "@/components/ui/ProjectModal";
 import { getProjectById } from "@/lib/data/projects.public";
 import { notFound } from "next/navigation";
 

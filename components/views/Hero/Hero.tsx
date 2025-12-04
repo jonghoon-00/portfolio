@@ -67,7 +67,7 @@ export default function Hero({ onHeroComplete }: HeroProps) {
             <motion.h1
               variants={item}
               className={clsx(
-                "mt-2 flex flex-col md:flex-row gap-2",
+                "mt-2 flex flex-col justify-center items-center md:flex-row gap-2",
                 "hero-title"
               )}
             >
