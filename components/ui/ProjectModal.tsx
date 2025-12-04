@@ -35,6 +35,7 @@ export default function ProjectModal({ children, title, accent }: ModalProps) {
       role="dialog"
       aria-modal="true"
       aria-label={`${title} 상세`}
+      style={accent ? { ["--accent" as any]: accent } : undefined}
     >
       <div
         className={clsx(
