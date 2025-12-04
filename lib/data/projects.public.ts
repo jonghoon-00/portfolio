@@ -17,12 +17,25 @@ export const PROJECTS: ProjectMetaBase[] = [
     ],
     mdx: () => import("@/markdown/projects/k-nostalgia.mdx"),
   },
+  {
+    id: PROJECT_IDS.BOARD_MATE,
+    title: "보드메이트 (Board Mate)",
+    accent: "#4A90E2",
+    type: "team",
+    techs: [
+      "React",
+      "Styled Components",
+      "TanStack Query",
+      "Redux Toolkit",
+      "Supabase",
+    ],
+    mdx: () => import("@/markdown/projects/board-mate.mdx"),
+  },
 ] satisfies ProjectMetaBase[];
 
 // 편의 함수
 export const mainProjects = PROJECTS.filter((p) =>
   MAIN_PROJECT_IDS.includes(p.id)
 );
-export const otherProjects = PROJECTS.filter((p) => !mainProjects.includes(p));
 export const getProjectById = (id: string): ProjectMetaBase | null =>
   PROJECTS.find((p) => p.id === id) ?? null;
