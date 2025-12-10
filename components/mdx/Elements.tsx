@@ -4,6 +4,7 @@ import React from "react";
 import { Col, Columns } from "@/components/layout/Columns";
 import { Section } from "@/components/layout/Section";
 import CldImage from "@/components/ui/CldImage";
+import { OtherProjectCard } from "@/components/views/projects/OtherProjects";
 
 function H1(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
@@ -35,7 +36,7 @@ function H3(props: React.HTMLAttributes<HTMLHeadingElement>) {
       className={clsx(
         "mt-8 mb-2",
         "font-semibold tracking-[-0.01em]",
-        "text-[clamp(18px,2.6vw,24px)] leading-[1.25]"
+        "text-[clamp(18px,2.6vw,24px)] leading-tight"
       )}
       {...props}
     />
@@ -43,7 +44,14 @@ function H3(props: React.HTMLAttributes<HTMLHeadingElement>) {
 }
 function H4(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h4 className="mt-6 mb-2 font-semibold text-lg leading-[1.3]" {...props} />
+    <h4
+      className={clsx(
+        "mt-6 mb-2",
+        "font-semibold tracking-[-0.01em]",
+        "text-[clamp(16px,1.6vw,20px)] leading-normal"
+      )}
+      {...props}
+    />
   );
 }
 
@@ -253,4 +261,5 @@ export const mdxComponents = {
   Section,
   CldImage,
   Figure,
+  OtherProjectCard,
 };

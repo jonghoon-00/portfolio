@@ -424,9 +424,14 @@
   background: transparent;
 }
 
-/* 와이드 모달 */
+.project-modal--default {
+  --modal-max-w-desktop: 960px;
+}
+.project-modal--sm {
+  --modal-max-w-desktop: 720px;
+}
 .project-modal--wide {
-  max-width: min(var(--modal-max-w-desktop-wide), 92vw);
+  --modal-max-w-desktop: 1120px;
 }
 
 /* 모달 내부 타이포 (조금 크게) */
@@ -521,11 +526,17 @@
 
 /* 모달 진입 애니메이션 */
 @keyframes modalIn {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(4px) scale(0.98);
+    transform: translateY(8px) scale(0.9);
+    filter: blur(4px);
   }
-  to {
+  60% {
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+    filter: blur(0);
+  }
+  100% {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
@@ -533,23 +544,12 @@
 
 /* 하단 시트 진입 애니메이션 */
 @keyframes sheetIn {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(24px);
   }
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/* Hero 섹션 화살표 위아래 바운스 */
-@keyframes arrow-bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(20px);
   }
 }

@@ -7,6 +7,9 @@ import { mainProjects } from "@/lib/data/projects.public";
 import { SectionDivider } from "@/components/ui/SectionDevider";
 import KNostalgiaCover from "@/public/images/cover/k-nostalgia.png";
 
+//TODO : - 태그 2줄로 정렬
+//	1줄: 프로젝트 성격(Team / 개인 / 도메인 영역 등)
+//	2줄: 기술 스택
 const MAIN_PROJECT_CARD_META: Record<
   ProjectId,
   {

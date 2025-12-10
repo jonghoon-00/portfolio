@@ -13,7 +13,7 @@ interface ModalProps {
   children: React.ReactNode;
   title: string;
   accent?: string;
-  size?: "default" | "sm";
+  size?: "default" | "sm" | "wide";
   onClose?: () => void;
 }
 
@@ -24,22 +24,22 @@ export default function ProjectModal({
   size = "default",
   onClose,
 }: ModalProps) {
-  const maxWidth =
-    size === "sm" ? "max-w-xl md:max-w-2xl" : "max-w-3xl md:max-w-5xl";
-
   const router = useRouter();
   const isDesktop = useIsDesktop();
   useLockBodyScroll(true);
 
+  const sizeClass =
+    size === "sm"
+      ? "project-modal--sm"
+      : size === "wide"
+      ? "project-modal--wide"
+      : "project-modal--default";
+
   const handleClose = () => {
-    if (onClose) {
-      onClose();
-    } else {
-      router.back();
-    }
+    if (onClose) onClose();
+    else router.back();
   };
 
-  // ESC 닫기
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && handleClose();
     window.addEventListener("keydown", onKey);
@@ -48,7 +48,9 @@ export default function ProjectModal({
 
   return (
     <div
-      className="fixed inset-0 z-100 bg-black/40 flex items-center justify-center p-4 maxWidth"
+      className={clsx(
+        "fixed inset-0 z-100 bg-black/40 flex items-center justify-center p-4"
+      )}
       onClick={handleClose}
       role="dialog"
       aria-modal="true"
@@ -57,9 +59,9 @@ export default function ProjectModal({
     >
       <div
         className={clsx(
-          "project-modal modal-typography prose prose-neutral max-w-none relative",
+          "project-modal modal-typography relative w-full",
           isDesktop ? "modal-enter" : "sheet-enter",
-          maxWidth
+          sizeClass
         )}
         onClick={(e) => e.stopPropagation()}
       >
@@ -71,17 +73,20 @@ export default function ProjectModal({
           ✕
         </button>
 
-        <header className="mb-6">
-          <h2
-            className="text-2xl font-semibold tracking-tight"
-            style={{ color: accent ?? "inherit" }}
-          >
-            {title}
-          </h2>
-        </header>
+        {/* 실제 텍스트 컨텐츠 래퍼 */}
+        <div className="prose prose-neutral max-w-none">
+          <header className="mb-6">
+            <h2
+              className="text-2xl font-semibold tracking-tight"
+              style={{ color: accent ?? "inherit" }}
+            >
+              {title}
+            </h2>
+          </header>
 
-        <div className="modal-body">
-          <Prose>{children}</Prose>
+          <div className="modal-body">
+            <Prose>{children}</Prose>
+          </div>
         </div>
       </div>
     </div>
