@@ -1,0 +1,85 @@
+> **보드게임 참여 인원을 구할 수 있는 지도 api를 활용한 커뮤니티 서비스**
+> 
+
+- github : https://github.com/jonghoon-00/board_mate
+- 배포 링크 :
+
+- **기간**: 2024.06.17 – 2024.06.21
+- **팀 규모**: FE 6명
+
+---
+
+## 기술 스택
+
+- **React 18, Vite,** TypeScript
+- **상태 관리**: Redux Toolkit (& React-Redux)
+- **데이터 페칭**: @tanstack/react-query
+- **백엔드 서비스**: Supabase (@supabase/supabase-js)
+- **지도 SDK**: react-kakao-maps-sdk
+- **스타일링**: styled-components, styled-reset
+
+---
+
+## 기여한 부분
+
+1. **게시글 CRUD**
+    - 목록 조회 / 상세 페이지
+    - 작성 · 수정 · 삭제
+2. **지도 기반 게시글 위치 표시**
+    - 카카오 지도 API 활용 (`react-kakao-maps-sdk`)
+    - 마커 클릭 시 게시글 상세 정보 팝업
+3. **댓글 기능**
+    - 사용자별 댓글 작성 · 수정 · 삭제
+    - 대댓글 미지원 (추후 확장 가능)
+
+---
+
+## 구현 상세
+
+### 1. 게시글 상세 페이지
+
+- React Query를 이용해 백엔드에서 게시글 데이터 패칭
+- Vite + React 환경에서 SSR 대신 CSR 기반 최적화
+- `react-kakao-maps-sdk` 내에서 지도 초기화
+
+```tsx
+// 예시: Map 컴포넌트
+import { useEffect } from 'react';
+import { Map as KakaoMap, MapMarker } from 'react-kakao-maps-sdk';
+
+export const Map = ({ latitude, longitude }: { latitude: number; longitude: number }) => {
+  return (
+    <KakaoMap
+      center={{ lat: latitude, lng: longitude }}
+      style={{ width: '100%', height: '400px' }}
+      level={3}
+    >
+      <MapMarker position={{ lat: latitude, lng: longitude }} />
+    </KakaoMap>
+  );
+};
+
+```
+
+### 2. 댓글 CRUD
+
+- React Query의 `useMutation`/`useQuery` 활용
+- `optimistic update`로 UX 개선
+- 에러 처리 및 로딩 상태(UI) 반영
+
+---
+
+## 회고 및 배운 점
+
+- **API 연동 경험**
+    - Supabase 클라이언트를 활용해 간편하게 CRUD 구현
+- **상태 관리**
+    - Redux Toolkit 사용으로 액션·리듀서 작성 간소화 체감
+- **협업 경험**
+    - 팀원이 제작한 지도 컴포넌트를 빠르게 이해하고 재구성
+- **추후 개선 사항**
+    - 지도 클러스터링 기능 추가
+    - 댓글 대댓글 기능 확장
+    - 모바일 반응형 UI 다듬기
+
+---

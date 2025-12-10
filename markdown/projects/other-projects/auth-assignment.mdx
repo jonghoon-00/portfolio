@@ -1,0 +1,18 @@
+**`Vite` `React-TS` `Zustand` `TanStack Query` `Axios` `Tailwind CSS`**
+
+회원가입, 로그인, 마이페이지 등 인증/인가 전반 구현 (개발 기간: 3일)
+
+**핵심 구현**
+
+- 권한별 라우팅 제어 (ProtectedRoute)
+- Zustand + Axios 인터셉터를 활용한 토큰 관리 자동화
+- TanStack Query를 통한 서버 상태 관리
+- Tailwind 플러그인 커스터마이징으로 재사용 가능한 스타일 클래스 구성
+
+**기술적 시도**
+
+- `api/axios.ts`: 요청/응답 인터셉터로 토큰 자동 주입
+- `ProtectedRoute.tsx`: 레이아웃 레벨 인증 가드 구현
+- `constants/queryKeys.ts`: 쿼리키 중앙 관리
+
+`개인 과제` · [배포](https://fe-internship-task.vercel.app/) · [GitHub](https://github.com/jonghoon-00/fe-internship-task)
