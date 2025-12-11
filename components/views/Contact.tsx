@@ -1,10 +1,13 @@
 "use client";
 
-import { useIsDesktop } from "@/hooks/useMediaQuery";
+import clsx from "clsx";
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import { HiLocationMarker, HiMail, HiPhone } from "react-icons/hi";
 import { IoArrowUp, IoCheckmark, IoCopy } from "react-icons/io5";
+
+import { useIsDesktop } from "@/hooks/useMediaQuery";
+import { SectionDivider } from "../ui/SectionDevider";
 
 type ContactItemKey = "email" | "phone" | "";
 
@@ -18,7 +21,7 @@ export default function Contact() {
   const [copiedItem, setCopiedItem] = useState<ContactItemKey>("");
 
   const handleCopy = (item: ContactItemKey, text: string) => {
-    // 필요하면 나중에 try/catch 추가해서 에러 처리해도 됨
+    // 나중에 try/catch 추가해서 에러 처리
     navigator.clipboard.writeText(text);
     setCopiedItem(item);
 
@@ -27,17 +30,11 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section-contact py-16 md:py-24">
+    <section id="contact" className="section-contact md:py-24">
       <div className="max-w-5xl mx-auto px-2 md:px-4">
-        {/* 헤더 영역 - 전체 섹션 헤더 스타일과 맞춰서 조정 */}
         <header className="mb-8 md:mb-10">
-          <p className="text-xs font-medium uppercase tracking-[0.25em] text-[rgb(var(--text-muted))] mb-2">
-            contact
-          </p>
-          <h2 className="text-2xl md:text-3xl font-semibold text-[rgb(var(--text-strong))]">
-            {/* 새로운 기회와 대화를 언제나 환영합니다. */}
-            문의 및 연락
-          </h2>
+          <p className="eyebrow">contact</p>
+          <h2 className="section-title">문의 및 연락</h2>
           <p className="flex flex-col">
             <span className="title-lead">함께 성장하고 싶습니다 👋</span>
             <span className="title-lead">
@@ -45,6 +42,8 @@ export default function Contact() {
             </span>
           </p>
         </header>
+
+        <SectionDivider />
 
         {/* 레이아웃 분기: 뷰포트 기준 */}
         {isDesktop ? (
@@ -64,19 +63,8 @@ export default function Contact() {
 function MobileContactView({ copiedItem, onCopy }: ContactViewProps) {
   return (
     <div className="max-w-md mx-auto">
-      {/* <div className="bg-gradient-to-b  */}
       {/* Header */}
       <div className="text-center space-y-3">
-        <div className="text-3xl mb-2"></div>
-        <h3 className="text-2xl font-bold text-white">
-          함께 성장하고 싶습니다 👋
-        </h3>
-        <p className="text-gray-400 text-sm leading-relaxed">
-          새로운 도전과 배움의 기회를
-          <br />
-          기다리고 있습니다
-        </p>
-
         {/* Contact Items */}
         <div className="space-y-2.5">
           {/* Email */}
@@ -160,9 +148,6 @@ function MobileContactView({ copiedItem, onCopy }: ContactViewProps) {
                   <div className="text-white text-sm font-medium">
                     jonghoon-00
                   </div>
-                  <div className="text-xs text-gray-500 mt-0.5">
-                    28 repositories
-                  </div>
                 </div>
               </div>
               <div className="text-white text-lg group-hover:translate-x-1 transition-transform">
@@ -173,7 +158,7 @@ function MobileContactView({ copiedItem, onCopy }: ContactViewProps) {
         </a>
 
         {/* Footer */}
-        <div className="pt-4 space-y-4 border-t border-white/10">
+        <div className="pt-8 md:pt-12 space-y-4 border-t border-white/10">
           <p className="text-center text-gray-400 text-sm leading-relaxed">
             포트폴리오를 봐주셔서 감사합니다
             <br />
@@ -196,16 +181,23 @@ function MobileContactView({ copiedItem, onCopy }: ContactViewProps) {
    Desktop Contact View
    =========================== */
 
+const FIRST_LINE_CARDS = clsx(
+  "group relative",
+  "flex-1 min-w-0",
+  "bg-white/10 backdrop-blur-sm",
+  "rounded-xl p-5 hover:bg-white/15 border border-white/10 hover:border-white/20",
+  "transition-all"
+);
+
 function DesktopContactView({ copiedItem, onCopy }: ContactViewProps) {
   return (
-    <div className="max-w-3xl mx-auto">
-      {/* <div className="bg-gradient-to-b from-gr */}
+    <div className={clsx("w-full mx-auto", "flex flex-col gap-4")}>
       {/* Contact Grid */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="flex justify-between gap-4">
         {/* Email (full width) */}
         <button
           onClick={() => onCopy("email", "your-email@example.com")}
-          className="col-span-2 group relative bg-white/10 backdrop-blur-sm rounded-xl p-5 hover:bg-white/15 transition-all border border-white/10 hover:border-white/20"
+          className={FIRST_LINE_CARDS}
         >
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
@@ -214,7 +206,7 @@ function DesktopContactView({ copiedItem, onCopy }: ContactViewProps) {
             <div className="flex-1 text-left">
               <div className="text-xs text-gray-400 mb-1">Email</div>
               <div className="text-white font-medium">
-                your-email@example.com
+                jonghoon2246@gmail.com
               </div>
             </div>
             {copiedItem === "email" ? (
@@ -231,7 +223,7 @@ function DesktopContactView({ copiedItem, onCopy }: ContactViewProps) {
         {/* Phone */}
         <button
           onClick={() => onCopy("phone", "+82 10-2246-9211")}
-          className="group relative bg-white/10 backdrop-blur-sm rounded-xl p-5 hover:bg-white/15 transition-all border border-white/10 hover:border-white/20"
+          className={FIRST_LINE_CARDS}
         >
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
@@ -252,7 +244,7 @@ function DesktopContactView({ copiedItem, onCopy }: ContactViewProps) {
         </button>
 
         {/* Location */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10">
+        <div className={FIRST_LINE_CARDS}>
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
               <HiLocationMarker className="w-6 h-6 text-white" />
