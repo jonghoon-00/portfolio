@@ -7,14 +7,13 @@ import { SECTIONS } from "@/constants/sections";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 
 export default function Nav() {
-  const HEADER_HEIGHT = 53; // 헤더 높이만큼 오프셋
+  const HEADER_HEIGHT = 48; // 헤더 높이만큼 오프셋
 
   const activeId = useScrollSpy(
     SECTIONS.map((s) => s.id),
     HEADER_HEIGHT
   );
 
-  // 함수를 반환하는 형태
   const handleClick = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
 
