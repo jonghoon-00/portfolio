@@ -5,9 +5,13 @@ import { motion } from "framer-motion";
 
 interface ScrollIndicatorProps {
   delay: number;
+  onClick: () => void;
 }
 
-export default function ScrollIndicator({ delay }: ScrollIndicatorProps) {
+export default function ScrollIndicator({
+  delay,
+  onClick,
+}: ScrollIndicatorProps) {
   return (
     <motion.button
       initial={{ opacity: 0, y: 4 }}
@@ -23,6 +27,7 @@ export default function ScrollIndicator({ delay }: ScrollIndicatorProps) {
         "flex flex-col items-center justify-center",
         "z-50"
       )}
+      onClick={onClick}
     >
       <div className="text-[10px] text-neutral-300/70">
         실서비스 환경에서의 프론트엔드 경험

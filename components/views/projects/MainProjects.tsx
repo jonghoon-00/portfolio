@@ -5,7 +5,9 @@ import { ProjectId } from "@/constants/projectIds";
 import { mainProjects } from "@/lib/data/projects.public";
 
 import { SectionDivider } from "@/components/ui/SectionDevider";
-import KNostalgiaCover from "@/public/images/cover/k-nostalgia.png";
+
+import boardMateCover from "@/public/images/cover/board-mate.png";
+import kNostalgiaCover from "@/public/images/cover/k-nostalgia.png";
 
 //TODO : - 태그 2줄로 정렬
 //	1줄: 프로젝트 성격(Team / 개인 / 도메인 영역 등)
@@ -20,15 +22,14 @@ const MAIN_PROJECT_CARD_META: Record<
   }
 > = {
   "k-nostalgia": {
-    imageSrc: KNostalgiaCover.src,
+    imageSrc: kNostalgiaCover.src,
     imageAlt: "향그리움(K-Nostalgia) 서비스 메인 화면",
     description:
       "전통시장 상점을 위한 커머스 서비스로, 쿠폰/결제/주문 내역 등 실제 서비스에 가까운 플로우를 구현한 프로젝트입니다.",
     tags: ["Team Project", "E-commerce", "Next.js · TS", "PortOne · Supabase"],
   },
   "board-mate": {
-    // TODO: 이미지 교체 필요
-    imageSrc: "ㅇ",
+    imageSrc: boardMateCover.src,
     imageAlt: "보드메이트 서비스 메인 화면",
     description:
       "주변 보드게임 유저를 탐색하고, 실시간으로 참여 인원을 구할 수 있는 위치 기반 커뮤니티 서비스입니다.",
@@ -39,14 +40,18 @@ const MAIN_PROJECT_CARD_META: Record<
 export default function MainProjects() {
   return (
     <>
-      <section id="main-projects" className="mt-16 sm:mt-20">
-        <div className="max-w-5xl mx-auto px-2 md:px-4">
+      <section id="main-projects">
+        <div className="max-w-5xl mx-auto">
           <header className="mb-4 sm:mb-6 flex flex-col gap-1.5">
             <p className="ml-2 eyebrow">Main projects</p>
             <h2 className="section-title ml-2 font-bold">주요 프로젝트</h2>
-            <p className="ml-2 title-lead">
-              대표적으로 구축한 서비스로, 실제 유저 플로우가 존재하고
-              기획–설계–개발을 모두 경험한 프로젝트입니다.
+            <p className="ml-2 flex flex-col md:flex-row md:gap-1">
+              <span className="title-lead">
+                대표적으로 구축한 서비스로, 실제 유저 플로우가 존재하고
+              </span>
+              <span className="title-lead">
+                기획-설계-개발을 모두 경험한 프로젝트입니다.
+              </span>
             </p>
           </header>
           <SectionDivider />

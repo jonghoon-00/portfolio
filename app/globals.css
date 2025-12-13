@@ -131,7 +131,7 @@
 
   a {
     color: var(--link);
-    text-decoration: underline;
+    text-decoration: none;
     text-underline-offset: 0.2em;
   }
   a:hover {
@@ -238,7 +238,7 @@
       rgb(var(--bg-work)) 0%,
       rgb(var(--bg-work)) 100%
     );
-    padding: 4rem 0;
+    @apply py-16 px-4;
   }
   .section-projects {
     background: linear-gradient(
@@ -247,11 +247,12 @@
       rgb(var(--bg-projects)) 60%,
       rgb(var(--bg-others)) 100%
     );
-    @apply py-3 md:py-14;
+    @apply py-16 px-4;
   }
   .section-contact {
     background-color: rgb(var(--bg-contact));
-    padding: 4rem 0;
+    /* padding: 4rem 0; */
+    @apply py-16 px-4;
   }
 
   .section-title {

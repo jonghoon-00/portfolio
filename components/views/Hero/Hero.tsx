@@ -1,9 +1,15 @@
 "use client";
 
 import clsx from "clsx";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useCallback, useRef } from "react";
 
+import { useIsMobile } from "@/hooks/useMediaQuery";
 import ScrollIndicator from "./ScrollIndicator";
 import SkillsBlock from "./SkillsBlock";
 
@@ -34,9 +40,13 @@ const item = {
 };
 
 const DELAY = TEXT_DURATION + TEXT_STAGGER * (TEXT_ITEMS - 1) - 0.3;
+const SNAP_THRESHOLD = 0.04; // 이 값 넘을 때 스냅
 
 export default function Hero({ onHeroComplete }: HeroProps) {
   const ref = useRef<HTMLDivElement | null>(null);
+  const isMobile = useIsMobile();
+  const overThresholdRef = useRef(false);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -44,6 +54,36 @@ export default function Hero({ onHeroComplete }: HeroProps) {
 
   const opacity = useTransform(scrollYProgress, [0, 0.1, 0.25], [1, 1, 0]);
   const translateY = useTransform(scrollYProgress, [0, 1], [0, -24]);
+
+  const handleScrollToNextSection = useCallback(() => {
+    const heroEl = ref.current;
+    if (!heroEl) return;
+
+    const nextEl = heroEl.nextElementSibling as HTMLElement | null;
+    if (!nextEl) return;
+
+    const top = nextEl.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({
+      top,
+      behavior: "smooth",
+    });
+  }, []);
+
+  // 모바일에서만: threshold를 넘어갈 때 한 번 실행
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    if (!isMobile) return;
+
+    const wasOver = overThresholdRef.current;
+    const isOver = value > SNAP_THRESHOLD;
+
+    if (!wasOver && isOver) {
+      handleScrollToNextSection();
+    }
+
+    // 값 업데이트(위로 올라올 시)
+    overThresholdRef.current = isOver;
+  });
+
   return (
     <section id="hero" className={clsx("relative section-hero")} ref={ref}>
       <div
@@ -88,7 +128,9 @@ export default function Hero({ onHeroComplete }: HeroProps) {
 
       {/* 모바일: 인디케이터 / 데스크탑: 스킬 블록 */}
       <SkillsBlock delay={DELAY} onHeroComplete={onHeroComplete} />
-      <ScrollIndicator delay={DELAY} />
+
+      {/* 인디케이터 클릭 시에도 항상 스크롤 동작 */}
+      <ScrollIndicator delay={DELAY} onClick={handleScrollToNextSection} />
     </section>
   );
 }

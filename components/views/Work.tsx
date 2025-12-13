@@ -59,7 +59,7 @@ export default function Work({ heroDone }: WorkProps) {
 
   return (
     <section id="work" className="section-work">
-      <div className="max-w-5xl mx-auto px-2 md:px-4">
+      <div className="max-w-5xl mx-auto">
         {/* 헤더 – 살짝만 페이드업 */}
         {/* heroDone + inView 조건 충족 시점부터 재생 */}
         <motion.header
@@ -78,7 +78,7 @@ export default function Work({ heroDone }: WorkProps) {
 
         <motion.div
           ref={ref}
-          className="scroll-mt-24 py-6 md:pt-4 space-y-10"
+          className="scroll-mt-24 py-0 md:py-6 md:pt-4 space-y-10"
           initial="hidden"
           animate={controls}
           variants={containerVariants}
@@ -87,7 +87,7 @@ export default function Work({ heroDone }: WorkProps) {
             ({ id, period, company, role, summary, duties, learnings }) => (
               <motion.section
                 key={id}
-                className="py-6 border-b border-[rgb(var(--border))]/60 last:border-b-0"
+                className="py-2 md:py-6 border-b border-[rgb(var(--border))]/60 last:border-b-0"
                 variants={containerVariants}
               >
                 <Columns
@@ -105,7 +105,7 @@ export default function Work({ heroDone }: WorkProps) {
                           <p className="text-xs font-semibold tracking-[0.22em] text-[rgb(var(--text-muted))]">
                             {period}
                           </p>
-                          <p className="text-[1.25rem] font-semibold">
+                          <p className="text-[1.5rem] font-semibold">
                             {company}
                           </p>
                           <p className="text-sm text-[rgb(var(--text-muted))]">
