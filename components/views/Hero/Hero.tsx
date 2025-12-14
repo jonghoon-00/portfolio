@@ -89,7 +89,7 @@ export default function Hero({ onHeroComplete }: HeroProps) {
       <div
         className={clsx(
           "hero-layer",
-          "max-w-5xl min-h-screen md:min-h-[82vh]",
+          "max-w-7xl min-h-screen md:min-h-[82vh]",
           "px-4 md:px-6  mx-auto",
           "flex flex-col items-center justify-center",
           "text-center",
@@ -101,13 +101,13 @@ export default function Hero({ onHeroComplete }: HeroProps) {
             variants={container}
             initial="hidden"
             animate="visible"
-            className={clsx("w-full mx-auto text-center", "md:max-w-[800px]")}
+            className={clsx("w-full mx-auto text-center")}
             style={{ opacity, y: translateY }}
           >
             <motion.h1
               variants={item}
               className={clsx(
-                "mt-2 flex flex-col justify-center items-center md:flex-row gap-2",
+                "mt-8 flex flex-col justify-center items-center md:flex-row gap-2",
                 "hero-title"
               )}
             >
@@ -115,7 +115,10 @@ export default function Hero({ onHeroComplete }: HeroProps) {
               <span>이종훈입니다.</span>
             </motion.h1>
 
-            <motion.p variants={item} className={clsx("hero-body mt-8")}>
+            <motion.p
+              variants={item}
+              className={clsx("hero-body", "mt-6 md:mt-10")}
+            >
               재사용 가능한 구조와 안정적인 UI를 설계합니다.
             </motion.p>
 
