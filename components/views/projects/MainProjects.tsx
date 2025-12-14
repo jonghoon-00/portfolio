@@ -1,41 +1,18 @@
 import clsx from "clsx";
-import Link from "next/link";
 
 import { ProjectId } from "@/constants/projectIds";
-import { mainProjects } from "@/lib/data/projects.public";
+import {
+  MAIN_PROJECT_CARD_META,
+  mainProjects,
+} from "@/lib/data/projects.public";
 
 import { SectionDivider } from "@/components/ui/SectionDevider";
 
-import boardMateCover from "@/public/images/cover/board-mate.png";
-import kNostalgiaCover from "@/public/images/cover/k-nostalgia.png";
+import Link from "next/link";
 
 //TODO : - 태그 2줄로 정렬
 //	1줄: 프로젝트 성격(Team / 개인 / 도메인 영역 등)
 //	2줄: 기술 스택
-const MAIN_PROJECT_CARD_META: Record<
-  ProjectId,
-  {
-    imageSrc: string;
-    imageAlt: string;
-    description: string;
-    tags: string[];
-  }
-> = {
-  "k-nostalgia": {
-    imageSrc: kNostalgiaCover.src,
-    imageAlt: "향그리움(K-Nostalgia) 서비스 메인 화면",
-    description:
-      "전통시장 상점을 위한 커머스 서비스로, 쿠폰/결제/주문 내역 등 실제 서비스에 가까운 플로우를 구현한 프로젝트입니다.",
-    tags: ["Team Project", "E-commerce", "Next.js · TS", "PortOne · Supabase"],
-  },
-  "board-mate": {
-    imageSrc: boardMateCover.src,
-    imageAlt: "보드메이트 서비스 메인 화면",
-    description:
-      "주변 보드게임 유저를 탐색하고, 실시간으로 참여 인원을 구할 수 있는 위치 기반 커뮤니티 서비스입니다.",
-    tags: ["Team Project", "Community", "React · JS", "Supabase"],
-  },
-};
 
 export default function MainProjects() {
   return (
@@ -58,7 +35,7 @@ export default function MainProjects() {
 
           <ul
             className={clsx(
-              "grid sm:grid-cols-2 gap-4 sm:gap-8",
+              "grid sm:grid-cols-2 gap-4 sm:gap-12",
               "py-2 sm:py-4"
             )}
           >
@@ -80,8 +57,7 @@ function MainProjectCard({ id, title }: { id: ProjectId; title: string }) {
     <li>
       <Link
         href={`/projects/${id}`}
-        scroll={false}
-        className="group block h-full"
+        className="group block h-full no-underline text-inherit -mx-1!"
       >
         <article
           className={clsx(
@@ -105,26 +81,40 @@ function MainProjectCard({ id, title }: { id: ProjectId; title: string }) {
           </div>
 
           {/* 텍스트 영역 */}
-          <div className="flex flex-col gap-1.5">
-            <h3 className="text-[15px] md:text-[16px] font-semibold tracking-[-0.02em]">
+          <div className="flex flex-col">
+            <h3 className="text-[17px] md:text-[23px] font-semibold tracking-[-0.02em] mt-1 mb-0.5">
               {title}
             </h3>
 
             {meta && (
               <>
-                <p className="text-[13px] md:text-[14px] leading-relaxed text-muted line-clamp-3">
-                  {meta.description}
-                </p>
+                {/* <SectionDivider space="sm" /> */}
+                <p className="h-[52px] text-muted">{meta.description}</p>
 
-                <div className="mt-2 flex flex-wrap gap-1.5">
-                  {meta.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-neutral-200"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                <SectionDivider space="sm" />
+
+                <div className="mt-2 flex flex-col gap-3">
+                  {/* context tags */}
+                  <div className="flex flex-wrap gap-1">
+                    {meta.contextTags.map((c) => (
+                      <span key={c} className="pill text-neutral-100!">
+                        {c}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* tech tags */}
+                  <div className="flex flex-wrap gap-1">
+                    {meta.techTags.map((t) => (
+                      <span
+                        key={t}
+                        // className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[12px] md:text-[12.5px] text-neutral-300"
+                        className="pill "
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </>
             )}

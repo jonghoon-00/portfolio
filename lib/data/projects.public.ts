@@ -1,5 +1,53 @@
-import { MAIN_PROJECT_IDS, PROJECT_IDS } from "@/constants/projectIds";
+import {
+  MAIN_PROJECT_IDS,
+  PROJECT_IDS,
+  ProjectId,
+} from "@/constants/projectIds";
+import boardMateCover from "@/public/images/cover/board-mate.png";
+import kNostalgiaCover from "@/public/images/cover/k-nostalgia.png";
 import type { OtherProjectMeta, ProjectMetaBase } from "@/types/project";
+
+// 메인 프로젝트 메타
+export const MAIN_PROJECT_CARD_META: Record<
+  ProjectId,
+  {
+    imageSrc: string;
+    imageAlt: string;
+    description: string;
+    contextTags: string[];
+    techTags: string[];
+  }
+> = {
+  "k-nostalgia": {
+    imageSrc: kNostalgiaCover.src,
+    imageAlt: "향그리움(K-Nostalgia) 서비스 메인 화면",
+    description:
+      "쿠폰/결제/주문 내역 등 실제 서비스에 가까운 플로우를 구현한 프로젝트입니다.",
+    contextTags: ["Team Project", "E-commerce"],
+    techTags: [
+      "Next.js · TS",
+      "zustand",
+      "Tanstack query",
+      "Tailwind",
+      "PortOne · Supabase",
+    ],
+  },
+  "board-mate": {
+    imageSrc: boardMateCover.src,
+    imageAlt: "보드메이트 서비스 메인 화면",
+    description:
+      // "주변 보드게임 유저를 탐색하고, 실시간으로 참여 인원을 구할 수 있는 위치 기반 커뮤니티 서비스입니다.",
+      "보드게임 유저 탐색용 위치 기반 커뮤니티 사이트입니다.",
+    contextTags: ["Team Project", "Community"],
+    techTags: [
+      "React · JS",
+      "Redux Toolkit",
+      "Tanstack query",
+      "Styled-components",
+      "Supabase",
+    ],
+  },
+};
 
 // 메인 프로젝트 MDX
 export const PROJECTS: ProjectMetaBase[] = [

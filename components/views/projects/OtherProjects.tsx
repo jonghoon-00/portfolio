@@ -85,7 +85,7 @@ export function OtherProjectCard({
       onClick={onClick}
       className={clsx(
         "bg-surface-card/70",
-        // 🔹 한 줄 안에서 높이 일정하게 맞추기 위한 설정
+        // 한 줄 안에서 높이를 일정하게 맞추기 위한 설정
         "flex h-full min-h-[160px] md:min-h-[180px] flex-col justify-between text-left",
         "group",
         "rounded-xl border border-white/6",
@@ -98,15 +98,11 @@ export function OtherProjectCard({
       )}
     >
       <div className="flex flex-col gap-1.5">
-        {badge && (
-          <span className="inline-flex items-center text-[11px] text-[rgb(var(--text-muted))]">
-            {badge}
-          </span>
-        )}
-        <h3 className="text-[14px] md:text-[15px] font-semibold tracking-[-0.01em]">
+        {badge && <p>{badge}</p>}
+        <h3 className="text-[17px] md:text-[20px] font-semibold tracking-[-0.01em]">
           {title}
         </h3>
-        <p className="flex flex-col text-[12px] md:text-[13px] leading-relaxed text-muted line-clamp-2">
+        <p className="flex flex-col text-[14px] md:text-[15px] leading-relaxed text-muted line-clamp-2">
           {summary.map((s) => (
             <span key={s}>{s}</span>
           ))}

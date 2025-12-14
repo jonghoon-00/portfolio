@@ -1,11 +1,13 @@
 "use client";
 
-import { Col, Columns } from "@/components/layout/Columns";
-import { WORK_ITEMS } from "@/lib/data/work.public";
 import clsx from "clsx";
 import { motion, useAnimationControls, useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
+
+import { Col, Columns } from "@/components/layout/Columns";
 import { SectionDivider } from "../ui/SectionDevider";
+
+import { WORK_ITEMS } from "@/lib/data/work.public";
 
 type WorkProps = {
   heroDone: boolean;
@@ -102,13 +104,13 @@ export default function Work({ heroDone }: WorkProps) {
                       <div className="work-meta">
                         <span className="work-meta-dot" />
                         <div className="space-y-1.5 text-sm md:text-[0.96rem]">
-                          <p className="text-xs font-semibold tracking-[0.22em] text-[rgb(var(--text-muted))]">
+                          <p className="text-xs md:text-[14px] font-semibold tracking-[0.22em] text-[rgb(var(--text-muted))]">
                             {period}
                           </p>
                           <p className="text-[1.5rem] font-semibold">
                             {company}
                           </p>
-                          <p className="text-sm text-[rgb(var(--text-muted))]">
+                          <p className="text-sm md:text-[15px] text-[rgb(var(--text-muted))]">
                             {role}
                           </p>
                         </div>
@@ -116,8 +118,9 @@ export default function Work({ heroDone }: WorkProps) {
 
                       <p
                         className={clsx(
-                          "text-[clamp(15px,1vw,16px)]",
-                          "leading-[1.65]"
+                          "text-[clamp(15px,1vw,18px)]",
+                          "leading-[1.65]",
+                          "mt-1"
                         )}
                       >
                         {summary}
@@ -142,7 +145,7 @@ export default function Work({ heroDone }: WorkProps) {
                             className={clsx(
                               "mt-3 pl-5 list-disc",
                               "space-y-2.5",
-                              "text-[clamp(15px,0.9vw,16px)] leading-[1.65]"
+                              "text-[clamp(15px,0.9vw,19px)] leading-[1.65]"
                             )}
                           >
                             {duties.map((duty) => (
@@ -158,7 +161,7 @@ export default function Work({ heroDone }: WorkProps) {
                             className={clsx(
                               "mt-3 pl-5 list-disc",
                               "space-y-2.5",
-                              "text-[clamp(15px,0.9vw,16px)] leading-[1.65]"
+                              "text-[clamp(15px,0.9vw,18px)] leading-[1.65]"
                             )}
                           >
                             {learnings.map((item) => (
