@@ -58,7 +58,7 @@ export const OTHER_PROJECTS: OtherProjectMeta[] = [
   {
     id: "auth-task",
     title: "🛡️ Auth 기능 구현 (인턴십 과제)",
-    badge: "개인 과제",
+    badge: "인턴십 과제",
     summary: [
       "회원가입, 로그인, 마이페이지 등 인증/인가 전반을 3일 안에 구현하며,",
       "토큰 관리와 라우팅 가드를 설계한 과제형 프로젝트입니다.",
