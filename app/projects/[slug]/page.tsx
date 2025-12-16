@@ -40,8 +40,13 @@ export default async function ProjectPage({
   const { default: Mdx } = await project.mdx();
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl md:text-4xl font-bold mb-4">{project.title}</h1>
+    <main className="max-w-5xl mx-auto px-4 py-20">
+      <h1
+        className="text-3xl md:text-4xl font-bold mb-4"
+        style={{ color: `${project.accent}` }}
+      >
+        {project.title}
+      </h1>
       <article style={{ ["--accent" as any]: project.accent }}>
         <Prose>
           <Mdx />
