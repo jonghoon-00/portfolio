@@ -23,8 +23,13 @@ export function SectionDivider({
   const widthClass = variant === "inset" ? "max-w-3xl" : "w-full";
 
   return (
+    // <div
+    //   className={`${spaceClass} ${widthClass} h-px bg-linear-to-r from-transparent via-white/10 to-transparent ${className}`}
+    // />
     <div
-      className={`${spaceClass} ${widthClass} h-px bg-linear-to-r from-transparent via-white/10 to-transparent ${className}`}
+      className={`${spaceClass} ${widthClass} h-px
+  bg-linear-to-r from-white/16 via-white/10 to-transparent
+  ${className}`}
     />
   );
 }

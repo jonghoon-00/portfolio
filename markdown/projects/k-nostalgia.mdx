@@ -1,83 +1,58 @@
-![향그리움 프로젝트 커버 이미지](/images/cover/k-nostalgia.png)
-
-### <Accent>프로젝트 개요</Accent>
-
- **전통 시장 정보를 탐색하고 특산품을 구매할 수 있는 통합 서비스입니다.** <br/>
-전통 시장을 젊은 세대에게 더 친근하게 소개하고 디지털로 연결하기 위해 만든 데모 프로젝트입니다.
-
 ---
+
+![향그리움 프로젝트 커버 이미지](/images/cover/k-nostalgia.png)
+(브로셔 / 커버 이미지 2컬럼으로 추후 수정)
+<br/>
+
+## 1. 프로젝트 개요
+<SectionDivider />
+
+**전통 시장 정보를 탐색하고 특산품을 구매할 수 있는 통합 서비스입니다.** <br/>
+
+<br />
+
 <Columns>
     <Col>
-         **개발 기간** 
+         **개발 기간**
 
-        - MVP : `6주`, 2024.07.15 - 2024.08.21(수)
+        - MVP : 2024.07.15 - 2024.08.21(수) / `6주`
         - 추가 구현 및 개선 : - 2025.09
 
-         **인원** : 6인 `(FE 5, UX/UI 1)` 
+        **인원** `FE 5` `UX/UI 1`
 
-        🔗 배포 링크 : [향그리움](https://k-nostalgia.vercel.app/)
-
-        🔗 깃허브 링크 : https://github.com/jonghoon-00/K-nostalgia
+        🔗 [향그리움 배포 링크](https://k-nostalgia.vercel.app/)
+        🔗 [깃허브 링크](https://github.com/jonghoon-00/k_nostalgia)
     </Col>
     <Col>
-        🛠️ **기여** 
-
-        1. **쿠폰·배송지·결제 플로우 구상 및 구현**
-        2. **결제 후 처리**
-            
-            주문 내역 관리, 리뷰 시스템, 환불 처리, 웹훅 연동 등
-            결제 이후 상품 상태 및 이력 관리 기능 구현
-            
-        3. **고객 지원**
-            - FAQ, 공지 사항 페이지 제작
+        **기여한 부분**
+            1. 쿠폰, 배송지, 결제 플로우 구상 및 구현
+            2. 결제 및 후 처리
+                - 주문 내역 관리, 리뷰 시스템, 환불 처리, 웹훅 연동 등
+                - 결제 이후 상품 상태 및 이력 관리 기능 구현
+            3. 고객 지원
+                - FAQ, 공지 사항 페이지 제작
     </Col>
+
 </Columns>
 
----
+## 2. **기술 스택**
 
-<CldImage src="v1763460174/%EC%BF%A0%ED%8F%B0_pdwodh.gif" alt="쿠폰 흐름 gif"/>
+<SectionDivider />
 
-![image.png](attachment:6b18f2d1-c9c5-46c4-a3af-0d78a92f9bf9:image.png)
+- `Next.js` `typescript`
+- `React-query` `Zustand`
+- `Tailwind` `shadcn` `swiper`
+- `Supabase` `port-one`
 
-## 프로젝트 개요
+<br />
 
-**전통 시장 정보를 탐색하고 특산품을 구매할 수 있는 통합 서비스입니다.**
+## 3. 주요 기여
 
-전통 시장을 젊은 세대에게 더 친근하게 소개하고 디지털로 연결하기 위해 만든 데모 프로젝트입니다.
+<SectionDivider />
 
-**개발 기간**
+### 3-1) 쿠폰 시스템 구현
 
-MVP 6주 (2024.07.15 - 2024.08.21)
-
-추가 구현 및 개선: ~ 2024.09
-
-**인원**
-
-6인 (FE 5, UX/UI 1)
-
-**링크**
-
-[배포 사이트](https://k-nostalgia.vercel.app/) · [GitHub](https://github.com/jonghoon-00/K-nostalgia)
-
----
-
-## **기술 스택**
-
-- **Next.js**
-- **Type Script**
-- **Tailwind**
-- **React-query, Zustand**
-- **Supabase**
-
----
-
-## 주요 기여
-
----
-
-### 1. 쿠폰 시스템 구현
-
-![장바구니 쿠폰 적용 > 결제 페이지 이동(상태 유지)](attachment:21755e27-a65a-4b9a-ab45-999cfca1dea6:쿠폰.gif)
+<CldImage src="v1763460174/%EC%BF%A0%ED%8F%B0_pdwodh.gif" alt="쿠폰 흐름 gif" />
 
 장바구니 쿠폰 적용 > 결제 페이지 이동(상태 유지)
 
@@ -94,11 +69,8 @@ MVP 6주 (2024.07.15 - 2024.08.21)
 - 쿠폰을 단순 상태값이 아닌 독립적인 DB 테이블로 분리하여 확장성 확보
 - 서버(Route Handler)를 통한 할인 금액 계산으로 위변조 가능성 최소화
 - 사용자 정보와 쿠폰 간 참조 관계 구조화
-    
-    ![Supabase - ‘users’ / ‘coupons’ 테이블](attachment:e3d8219e-8314-47b9-93f1-9bc4eb775819:image.png)
-    
-    Supabase - ‘users’ / ‘coupons’ 테이블
-    
+  ![Supabase - ‘users’ / ‘coupons’ 테이블](attachment:e3d8219e-8314-47b9-93f1-9bc4eb775819:image.png)
+  Supabase - ‘users’ / ‘coupons’ 테이블
 
 ---
 
@@ -115,7 +87,7 @@ MVP 6주 (2024.07.15 - 2024.08.21)
 
 ### 3. 결제 플로우 전체 담당
 
-![결제(2).gif](attachment:9f1d9315-b1a1-40e5-99af-405ec5f9f369:결제(2).gif)
+![결제(2).gif](<attachment:9f1d9315-b1a1-40e5-99af-405ec5f9f369:결제(2).gif>)
 
 **구현 내용**
 

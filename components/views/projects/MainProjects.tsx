@@ -6,7 +6,7 @@ import {
   mainProjects,
 } from "@/lib/data/projects.public";
 
-import { SectionDivider } from "@/components/ui/SectionDevider";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 
 import Link from "next/link";
 

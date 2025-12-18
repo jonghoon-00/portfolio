@@ -5,7 +5,7 @@ import { motion, useAnimationControls, useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 import { Col, Columns } from "@/components/layout/Columns";
-import { SectionDivider } from "../ui/SectionDevider";
+import { SectionDivider } from "../ui/SectionDivider";
 
 import { WORK_ITEMS } from "@/lib/data/work.public";
 

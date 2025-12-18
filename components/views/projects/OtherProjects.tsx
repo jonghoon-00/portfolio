@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { Prose } from "@/components/mdx/Prose";
 import ProjectModal from "@/components/ui/ProjectModal";
-import { SectionDivider } from "@/components/ui/SectionDevider";
+import { SectionDivider } from "@/components/ui/SectionDivider";
 
 import {
   OTHER_PROJECTS,

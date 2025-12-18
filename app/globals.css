@@ -455,7 +455,7 @@
 }
 
 .project-modal--default {
-  --modal-max-w-desktop: 960px;
+  --modal-max-w-desktop: 1024px;
 }
 .project-modal--sm {
   --modal-max-w-desktop: 720px;

@@ -5,6 +5,8 @@ import { Col, Columns } from "@/components/layout/Columns";
 import { Section } from "@/components/layout/Section";
 import CldImage from "@/components/ui/CldImage";
 import { OtherProjectCard } from "@/components/views/projects/OtherProjects";
+import { SectionDivider } from "../ui/SectionDivider";
+import SoftDivider from "../ui/SoftDivider";
 
 function H1(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
@@ -12,7 +14,7 @@ function H1(props: React.HTMLAttributes<HTMLHeadingElement>) {
       className={clsx(
         "mt-6 mb-4",
         "font-bold tracking-[-0.02em]",
-        "text-[clamp(28px,4.4vw,40px)] leading-[1.15]"
+        "text-[clamp(28px,4.4vw,38px)] leading-[1.15]"
       )}
       {...props}
     />
@@ -24,7 +26,7 @@ function H2(props: React.HTMLAttributes<HTMLHeadingElement>) {
       className={clsx(
         "mt-10 mb-3",
         "font-semibold tracking-[-0.02em]",
-        "text-[clamp(22px,3.4vw,32px)] leading-[1.20]"
+        "text-[clamp(22px,3.2vw,28px)] leading-[1.20]"
       )}
       {...props}
     />
@@ -36,7 +38,7 @@ function H3(props: React.HTMLAttributes<HTMLHeadingElement>) {
       className={clsx(
         "mt-8 mb-2",
         "font-semibold tracking-[-0.01em]",
-        "text-[clamp(18px,2.6vw,24px)] leading-tight"
+        "text-[clamp(18px,2.6vw,22px)] leading-tight"
       )}
       {...props}
     />
@@ -60,7 +62,7 @@ function P(props: React.HTMLAttributes<HTMLParagraphElement>) {
     <p
       className={clsx(
         "my-3",
-        "text-[clamp(15px,1.1vw,17px)] leading-[1.70]",
+        "text-[clamp(15px,1.1vw,20px)] leading-[1.70]",
         "text-[rgb(var(--text-strong))]"
       )}
       {...props}
@@ -71,25 +73,32 @@ function P(props: React.HTMLAttributes<HTMLParagraphElement>) {
 function A(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
     <a
-      className="text-[var(--link)] underline underline-offset-[0.2em] hover:text-[var(--link-hover)]"
+      className="text-[var(--link)] hover:text-[var(--link-hover)] text-[18px]"
       {...props}
+      target="_blank"
     />
   );
 }
 
 function Ul(props: React.HTMLAttributes<HTMLUListElement>) {
-  return <ul className="my-3 pl-6 list-disc space-y-[0.35rem]" {...props} />;
-}
-function Ol(props: React.HTMLAttributes<HTMLOListElement>) {
-  return <ol className="my-3 pl-6 list-decimal space-y-[0.35rem]" {...props} />;
-}
-
-function Li(props: React.LiHTMLAttributes<HTMLLIElement>) {
   return (
-    <li
-      className="marker:text-neutral-400 leading-[1.65] [&>p]:my-0"
+    <ul
+      className="my-3 pl-6 list-disc space-y-[0.35rem] text-[clamp(14px,1.1vw,17px)]"
       {...props}
     />
+  );
+}
+function Ol(props: React.HTMLAttributes<HTMLOListElement>) {
+  return (
+    <ol
+      className="my-3 pl-6 list-decimal space-y-[0.35rem] text-[clamp(14px,1.1vw,17px)]"
+      {...props}
+    />
+  );
+}
+function Li(props: React.LiHTMLAttributes<HTMLLIElement>) {
+  return (
+    <li className=" leading-[1.65] [&>p]:my-0 [&>p]:text-inherit" {...props} />
   );
 }
 
@@ -109,15 +118,16 @@ function Blockquote(props: React.HTMLAttributes<HTMLQuoteElement>) {
 
 function Hr(props: React.HTMLAttributes<HTMLHRElement>) {
   return (
-    <hr className="my-6 border-t border-[rgb(var(--border))]" {...props} />
+    <hr className="my-2 border-t border-[rgb(var(--border))]" {...props} />
   );
 }
 
 function CodeInline(props: React.HTMLAttributes<HTMLElement>) {
   return (
     <code
-      className="rounded-md px-[4px] py-[2px] bg-[rgb(var(--surface-card))] text-[0.90em]"
+      className="rounded-md px-[4px] py-[2px] bg-[rgb(var(--border))] text-[0.90em]"
       {...props}
+      // style={{ backgroundColor: "dark gray" }}
     />
   );
 }
@@ -262,4 +272,6 @@ export const mdxComponents = {
   CldImage,
   Figure,
   OtherProjectCard,
+  SectionDivider,
+  SoftDivider,
 };

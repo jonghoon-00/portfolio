@@ -7,7 +7,7 @@ import { HiLocationMarker, HiMail, HiPhone } from "react-icons/hi";
 import { IoArrowUp, IoCheckmark, IoCopy } from "react-icons/io5";
 
 import { useIsDesktop } from "@/hooks/useMediaQuery";
-import { SectionDivider } from "../ui/SectionDevider";
+import { SectionDivider } from "../ui/SectionDivider";
 
 type ContactItemKey = "email" | "phone" | "";
 
