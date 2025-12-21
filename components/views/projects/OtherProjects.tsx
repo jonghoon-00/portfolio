@@ -98,7 +98,9 @@ export function OtherProjectCard({
       )}
     >
       <div className="flex flex-col gap-1.5">
-        {badge && <p>{badge}</p>}
+        {badge && (
+          <p className="text-muted text-[15px] md:text-[17px]">{badge}</p>
+        )}
         <h3 className="text-[17px] md:text-[20px] font-semibold tracking-[-0.01em]">
           {title}
         </h3>
@@ -130,7 +132,7 @@ export function OtherProjectCard({
               className="underline underline-offset-2 decoration-primary-500/60 group-hover:decoration-primary-400"
               onClick={(e) => e.stopPropagation()}
             >
-              배포
+              배포 링크
             </a>
           )}
           {githubUrl && (

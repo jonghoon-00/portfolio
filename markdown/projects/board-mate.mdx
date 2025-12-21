@@ -1,85 +1,84 @@
 > **보드게임 참여 인원을 구할 수 있는 지도 api를 활용한 커뮤니티 서비스**
-> 
 
-- github : https://github.com/jonghoon-00/board_mate
-- 배포 링크 :
+<Columns>
+  <Col>
+    **담당 기능**  
+      - 게시글 CRUD (목록 / 상세 / 작성 · 수정 · 삭제)
+      - 지도 기반 게시글 위치 표시 (카카오 지도 API)
+      - 댓글 CRUD 및 사용자별 권한 처리
+  </Col>
+  <Col>
+    <br/>
+    - **개발 기간**: 2024.06.17 – 2024.06.21 / `1주`  
+    - **팀 규모**: `FE 6`
 
-- **기간**: 2024.06.17 – 2024.06.21
-- **팀 규모**: FE 6명
+    🔗 [깃허브 링크](https://github.com/jonghoon-00/board_mate)
 
----
-
-## 기술 스택
-
-- **React 18, Vite,** TypeScript
-- **상태 관리**: Redux Toolkit (& React-Redux)
-- **데이터 페칭**: @tanstack/react-query
-- **백엔드 서비스**: Supabase (@supabase/supabase-js)
-- **지도 SDK**: react-kakao-maps-sdk
-- **스타일링**: styled-components, styled-reset
-
----
-
-## 기여한 부분
-
-1. **게시글 CRUD**
-    - 목록 조회 / 상세 페이지
-    - 작성 · 수정 · 삭제
-2. **지도 기반 게시글 위치 표시**
-    - 카카오 지도 API 활용 (`react-kakao-maps-sdk`)
-    - 마커 클릭 시 게시글 상세 정보 팝업
-3. **댓글 기능**
-    - 사용자별 댓글 작성 · 수정 · 삭제
-    - 대댓글 미지원 (추후 확장 가능)
+  </Col>
+</Columns>
 
 ---
 
-## 구현 상세
+## 핵심 구현 및 판단
 
-### 1. 게시글 상세 페이지
+### 1. 지도 기반 게시글 표시 구조 설계
 
-- React Query를 이용해 백엔드에서 게시글 데이터 패칭
-- Vite + React 환경에서 SSR 대신 CSR 기반 최적화
-- `react-kakao-maps-sdk` 내에서 지도 초기화
+#### **문제 상황**
 
-```tsx
-// 예시: Map 컴포넌트
-import { useEffect } from 'react';
-import { Map as KakaoMap, MapMarker } from 'react-kakao-maps-sdk';
+게시글 정보와 위치 데이터를 함께 표현해야 했습니다.
 
-export const Map = ({ latitude, longitude }: { latitude: number; longitude: number }) => {
-  return (
-    <KakaoMap
-      center={{ lat: latitude, lng: longitude }}
-      style={{ width: '100%', height: '400px' }}
-      level={3}
-    >
-      <MapMarker position={{ lat: latitude, lng: longitude }} />
-    </KakaoMap>
-  );
-};
+지도 마커와 게시글 상세 정보 간의 연결 구조를 명확히 설계할 필요가 있었습니다.
 
-```
+#### **판단**
 
-### 2. 댓글 CRUD
+지도 UI는 시각적 보조 수단으로 활용하고,  
+데이터의 중심은 게시글에 두는 구조가 유지보수에 유리하다고 판단했습니다.
 
-- React Query의 `useMutation`/`useQuery` 활용
-- `optimistic update`로 UX 개선
-- 에러 처리 및 로딩 상태(UI) 반영
+#### **해결**
+
+- 게시글 데이터를 기준으로 지도 마커를 생성
+- 마커 클릭 시 해당 게시글 상세 정보를 팝업으로 노출
+- `react-kakao-maps-sdk`를 활용해 지도 초기화 및 마커 관리
+
+#### **결과**
+
+- 게시글과 지도 간 역할이 분리된 명확한 구조 확보
+- 지도 UI 확장(클러스터링 등)을 고려할 수 있는 기반 마련
+
+<br />
 
 ---
 
-## 회고 및 배운 점
+### 2. 댓글 CRUD 및 사용자 경험 개선
 
-- **API 연동 경험**
-    - Supabase 클라이언트를 활용해 간편하게 CRUD 구현
-- **상태 관리**
-    - Redux Toolkit 사용으로 액션·리듀서 작성 간소화 체감
-- **협업 경험**
-    - 팀원이 제작한 지도 컴포넌트를 빠르게 이해하고 재구성
-- **추후 개선 사항**
-    - 지도 클러스터링 기능 추가
-    - 댓글 대댓글 기능 확장
-    - 모바일 반응형 UI 다듬기
+#### **문제 상황**
+
+댓글 작성·수정·삭제 시 화면 지연이 발생하여  
+사용자에게 즉각적인 피드백을 주기 어려웠습니다.
+
+#### **판단**
+
+커뮤니티 서비스 특성상 댓글 반응 속도가 UX에 직접적인 영향을 준다고 판단했습니다.
+
+#### **해결**
+
+- React Query의 `useMutation`과 `optimistic update` 적용
+- 로딩/에러 상태를 UI에 명확히 반영
+
+#### **결과**
+
+- 사용자 인터랙션에 즉각 반응하는 댓글 UX 구현
+- 서버 응답 지연 상황에서도 안정적인 화면 유지
+
+<br />
 
 ---
+
+## 회고
+
+짧은 기간 내 팀 프로젝트를 진행하며  
+기존 코드 구조를 빠르게 이해하고 기능을 확장하는 경험을 할 수 있었습니다.
+
+이후 프로젝트에서는 상태 관리 책임을 더 명확히 나누는 설계를 기준으로 삼게 되었습니다.
+
+<br />

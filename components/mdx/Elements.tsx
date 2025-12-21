@@ -8,49 +8,57 @@ import { OtherProjectCard } from "@/components/views/projects/OtherProjects";
 import { SectionDivider } from "../ui/SectionDivider";
 import SoftDivider from "../ui/SoftDivider";
 
+//프로젝트 타이틀
 function H1(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h1
       className={clsx(
-        "mt-6 mb-4",
+        "mt-6 mb-5",
         "font-bold tracking-[-0.02em]",
-        "text-[clamp(28px,4.4vw,38px)] leading-[1.15]"
+        "text-[clamp(30px,4.8vw,40px)] leading-[1.12]",
+        "text-white"
       )}
       {...props}
     />
   );
 }
+//큰 섹션
 function H2(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2
       className={clsx(
-        "mt-10 mb-3",
+        "mt-16 mb-4",
         "font-semibold tracking-[-0.02em]",
-        "text-[clamp(22px,3.2vw,28px)] leading-[1.20]"
+        "text-[clamp(24px,3.6vw,30px)] leading-[1.2]",
+        "text-[rgb(var(--text-strong))]"
       )}
       {...props}
     />
   );
 }
+//번호 섹션
 function H3(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
       className={clsx(
-        "mt-8 mb-2",
+        "mt-10 mb-2",
         "font-semibold tracking-[-0.01em]",
-        "text-[clamp(18px,2.6vw,22px)] leading-tight"
+        "text-[clamp(19px,2.8vw,23px)] leading-tight",
+        "text-[rgb(var(--accent))]"
       )}
       {...props}
     />
   );
 }
+//문제, 판단, 해결, 결과 등등
 function H4(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h4
       className={clsx(
-        "mt-6 mb-2",
-        "font-semibold tracking-[-0.01em]",
-        "text-[clamp(16px,1.6vw,20px)] leading-normal"
+        "mt-6 mb-1",
+        "font-medium tracking-[-0.005em]",
+        "text-[clamp(15px,1.4vw,17px)] leading-normal",
+        "text-[rgb(var(--text-muted))]"
       )}
       {...props}
     />
@@ -62,7 +70,7 @@ function P(props: React.HTMLAttributes<HTMLParagraphElement>) {
     <p
       className={clsx(
         "my-3",
-        "text-[clamp(15px,1.1vw,20px)] leading-[1.70]",
+        "text-[clamp(15px,1.1vw,20px)] leading-[1.75]",
         "text-[rgb(var(--text-strong))]"
       )}
       {...props}
@@ -91,7 +99,7 @@ function Ul(props: React.HTMLAttributes<HTMLUListElement>) {
 function Ol(props: React.HTMLAttributes<HTMLOListElement>) {
   return (
     <ol
-      className="my-3 pl-6 list-decimal space-y-[0.35rem] text-[clamp(14px,1.1vw,17px)]"
+      className="my-3 pl-6 list-decimal space-y-[0.35rem] text-[clamp(14px,1.1vw,18px)]"
       {...props}
     />
   );

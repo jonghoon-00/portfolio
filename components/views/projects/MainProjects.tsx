@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Link from "next/link";
 
 import { ProjectId } from "@/constants/projectIds";
 import {
@@ -7,12 +8,6 @@ import {
 } from "@/lib/data/projects.public";
 
 import { SectionDivider } from "@/components/ui/SectionDivider";
-
-import Link from "next/link";
-
-//TODO : - 태그 2줄로 정렬
-//	1줄: 프로젝트 성격(Team / 개인 / 도메인 영역 등)
-//	2줄: 기술 스택
 
 export default function MainProjects() {
   return (
@@ -88,7 +83,6 @@ function MainProjectCard({ id, title }: { id: ProjectId; title: string }) {
 
             {meta && (
               <>
-                {/* <SectionDivider space="sm" /> */}
                 <p className="h-[52px] text-muted">{meta.description}</p>
 
                 <SectionDivider space="sm" />
@@ -106,11 +100,7 @@ function MainProjectCard({ id, title }: { id: ProjectId; title: string }) {
                   {/* tech tags */}
                   <div className="flex flex-wrap gap-1">
                     {meta.techTags.map((t) => (
-                      <span
-                        key={t}
-                        // className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[12px] md:text-[12.5px] text-neutral-300"
-                        className="pill "
-                      >
+                      <span key={t} className="pill ">
                         {t}
                       </span>
                     ))}
