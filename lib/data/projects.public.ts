@@ -18,6 +18,13 @@ export const MAIN_PROJECT_CARD_META: Record<
     techTags: string[];
   }
 > = {
+  "design-system-showcase": {
+    imageSrc: "",
+    imageAlt: "UI-KIT 메인 화면",
+    description: "UI 시스템 설계, 운영에 대한 사고방식을 담은 프로젝트입니다.",
+    contextTags: [],
+    techTags: [],
+  },
   "k-nostalgia": {
     imageSrc: kNostalgiaCover.src,
     imageAlt: "향그리움(K-Nostalgia) 서비스 메인 화면",
@@ -51,6 +58,14 @@ export const MAIN_PROJECT_CARD_META: Record<
 
 // 메인 프로젝트 MDX
 export const PROJECTS: ProjectMetaBase[] = [
+  {
+    id: PROJECT_IDS.UI_KIT,
+    title: "UI Kit / Design System Showcase",
+    accent: "#4A90E2",
+    type: "personal",
+    techs: [],
+    mdx: () => import("@/markdown/projects/ui-kit.mdx"),
+  },
   {
     id: PROJECT_IDS.K_NOSTALGIA,
     title: "향그리움 (K-Nostalgia)",
