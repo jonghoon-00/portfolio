@@ -67,7 +67,7 @@ export default function ProjectModal({
       >
         <button
           onClick={handleClose}
-          className="modal-close btn btn-ghost rounded-full h-9 w-9 flex items-center justify-center"
+          className="modal-close btn btn-ghost h-9 w-9 flex items-center justify-center"
           aria-label="닫기"
         >
           ✕
@@ -75,7 +75,7 @@ export default function ProjectModal({
 
         {/* 실제 텍스트 컨텐츠 래퍼 */}
         <div className="prose prose-neutral max-w-none">
-          <header className="mb-6">
+          <header className="my-4">
             <h2
               className="text-2xl font-semibold tracking-tight"
               style={{ color: accent ?? "inherit" }}
@@ -83,7 +83,6 @@ export default function ProjectModal({
               {title}
             </h2>
           </header>
-
           <div className="modal-body">
             <Prose>{children}</Prose>
           </div>
