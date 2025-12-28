@@ -29,7 +29,7 @@ function H2(props: React.HTMLAttributes<HTMLHeadingElement>) {
       className={clsx(
         "mt-16 mb-4",
         "font-semibold tracking-[-0.02em]",
-        "text-[clamp(24px,3.6vw,30px)] leading-[1.2]",
+        "text-[clamp(24px,3.8vw,32px)] leading-[1.2]",
         "text-[rgb(var(--text-strong))]"
       )}
       {...props}
@@ -43,7 +43,7 @@ function H3(props: React.HTMLAttributes<HTMLHeadingElement>) {
       className={clsx(
         "mt-10 mb-2",
         "font-semibold tracking-[-0.01em]",
-        "text-[clamp(19px,2.8vw,23px)] leading-tight",
+        "text-[clamp(19px,3vw,25px)] leading-tight",
         "text-[rgb(var(--accent))]"
       )}
       {...props}
@@ -57,7 +57,7 @@ function H4(props: React.HTMLAttributes<HTMLHeadingElement>) {
       className={clsx(
         "mt-6 mb-1",
         "font-medium tracking-[-0.005em]",
-        "text-[clamp(15px,1.4vw,17px)] leading-normal",
+        "text-[clamp(15px,1.7vw,18px)] leading-normal",
         "text-[rgb(var(--text-muted))]"
       )}
       {...props}
@@ -91,7 +91,7 @@ function A(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
 function Ul(props: React.HTMLAttributes<HTMLUListElement>) {
   return (
     <ul
-      className="my-3 pl-6 list-disc space-y-[0.35rem] text-[clamp(14px,1.1vw,17px)]"
+      className="my-3 pl-6 list-disc space-y-[0.35rem] text-[clamp(14px,1.1vw,19px)]"
       {...props}
     />
   );
