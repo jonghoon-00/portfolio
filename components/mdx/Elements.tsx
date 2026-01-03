@@ -3,10 +3,11 @@ import React from "react";
 
 import { Col, Columns } from "@/components/layout/Columns";
 import { Section } from "@/components/layout/Section";
-import CldImage from "@/components/ui/CldImage";
+import CldImage from "@/components/mdx/customTag/CldImage";
 import { OtherProjectCard } from "@/components/views/projects/OtherProjects";
 import { SectionDivider } from "../ui/SectionDivider";
 import SoftDivider from "../ui/SoftDivider";
+import { AnchorHeading } from "./customTag/AnchorHeading";
 
 //프로젝트 타이틀
 function H1(props: React.HTMLAttributes<HTMLHeadingElement>) {
@@ -23,35 +24,42 @@ function H1(props: React.HTMLAttributes<HTMLHeadingElement>) {
   );
 }
 //큰 섹션
-function H2(props: React.HTMLAttributes<HTMLHeadingElement>) {
+export function H2({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2
+      {...props}
       className={clsx(
         "mt-16 mb-4",
         "font-semibold tracking-[-0.02em]",
         "text-[clamp(24px,3.8vw,32px)] leading-[1.2]",
         "text-[rgb(var(--text-strong))]"
       )}
-      {...props}
     />
   );
 }
 //번호 섹션
-function H3(props: React.HTMLAttributes<HTMLHeadingElement>) {
+export function H3({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
+      {...props}
       className={clsx(
         "mt-10 mb-2",
         "font-semibold tracking-[-0.01em]",
         "text-[clamp(19px,3vw,25px)] leading-tight",
-        "text-[rgb(var(--accent))]"
+        "text-[rgb(var(--accent))]",
+        className
       )}
-      {...props}
     />
   );
 }
 //문제, 판단, 해결, 결과 등등
-function H4(props: React.HTMLAttributes<HTMLHeadingElement>) {
+export function H4(props: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h4
       className={clsx(
@@ -78,12 +86,30 @@ function P(props: React.HTMLAttributes<HTMLParagraphElement>) {
   );
 }
 
-function A(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+function A({
+  href = "",
+  target,
+  rel,
+  ...props
+}: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+  const isHashLink = typeof href === "string" && href.startsWith("#");
+  const isExternal = typeof href === "string" && /^(https?:)?\/\//.test(href);
+
+  // 해시 링크는 무조건 같은 탭 이동
+  if (isHashLink) {
+    return <a href={href} {...props} />;
+  }
+
+  // 외부 링크는 새 탭
+  if (isExternal) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" {...props} />
+    );
+  }
   return (
     <a
       className="text-[var(--link)] hover:text-[var(--link-hover)] text-[18px]"
       {...props}
-      target="_blank"
     />
   );
 }
@@ -282,4 +308,5 @@ export const mdxComponents = {
   OtherProjectCard,
   SectionDivider,
   SoftDivider,
+  AnchorHeading,
 };
