@@ -10,68 +10,49 @@ import SoftDivider from "../ui/SoftDivider";
 import { AnchorHeading } from "./customTag/AnchorHeading";
 
 //프로젝트 타이틀
-function H1(props: React.HTMLAttributes<HTMLHeadingElement>) {
-  return (
-    <h1
-      className={clsx(
-        "mt-6 mb-5",
-        "font-bold tracking-[-0.02em]",
-        "text-[clamp(30px,4.8vw,40px)] leading-[1.12]",
-        "text-white"
-      )}
-      {...props}
-    />
-  );
-}
+const H1 = withHeadingMeta(
+  "h1",
+  1,
+  clsx(
+    "mt-6 mb-5",
+    "font-bold tracking-[-0.02em]",
+    "text-[clamp(30px,4.8vw,40px)] leading-[1.12]",
+    "text-white"
+  )
+);
 //큰 섹션
-export function H2({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) {
-  return (
-    <h2
-      {...props}
-      className={clsx(
-        "mt-16 mb-4",
-        "font-semibold tracking-[-0.02em]",
-        "text-[clamp(24px,3.8vw,32px)] leading-[1.2]",
-        "text-[rgb(var(--text-strong))]"
-      )}
-    />
-  );
-}
+const H2 = withHeadingMeta(
+  "h2",
+  2,
+  clsx(
+    "mt-16 mb-4",
+    "font-semibold tracking-[-0.02em]",
+    "text-[clamp(24px,3.8vw,32px)] leading-[1.2]",
+    "text-[rgb(var(--text-strong))]"
+  )
+);
 //번호 섹션
-export function H3({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) {
-  return (
-    <h3
-      {...props}
-      className={clsx(
-        "mt-10 mb-2",
-        "font-semibold tracking-[-0.01em]",
-        "text-[clamp(19px,3vw,25px)] leading-tight",
-        "text-[rgb(var(--accent))]",
-        className
-      )}
-    />
-  );
-}
+const H3 = withHeadingMeta(
+  "h3",
+  3,
+  clsx(
+    "mt-10 mb-2",
+    "font-semibold tracking-[-0.01em]",
+    "text-[clamp(19px,3vw,25px)] leading-tight",
+    "text-[rgb(var(--accent))]"
+  )
+);
 //문제, 판단, 해결, 결과 등등
-export function H4(props: React.HTMLAttributes<HTMLHeadingElement>) {
-  return (
-    <h4
-      className={clsx(
-        "mt-6 mb-1",
-        "font-medium tracking-[-0.005em]",
-        "text-[clamp(15px,1.7vw,18px)] leading-normal",
-        "text-[rgb(var(--text-muted))]"
-      )}
-      {...props}
-    />
-  );
-}
+const H4 = withHeadingMeta(
+  "h4",
+  4,
+  clsx(
+    "mt-6 mb-1",
+    "font-medium tracking-[-0.005em]",
+    "text-[clamp(15px,1.7vw,18px)] leading-normal",
+    "text-[rgb(var(--text-muted))]"
+  )
+);
 
 function P(props: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
@@ -310,3 +291,41 @@ export const mdxComponents = {
   SoftDivider,
   AnchorHeading,
 };
+
+// 유틸 함수
+function getText(node: React.ReactNode): string {
+  if (node == null) return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(getText).join("");
+  if (React.isValidElement(node)) {
+    const element = node as React.ReactElement<{ children?: React.ReactNode }>;
+    return getText(element.props.children);
+  }
+  return "";
+}
+function slugify(input: string) {
+  return input
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w\-가-힣]/g, "");
+}
+function withHeadingMeta<T extends React.HTMLAttributes<HTMLHeadingElement>>(
+  Tag: "h1" | "h2" | "h3" | "h4",
+  level: 1 | 2 | 3 | 4,
+  className: string
+) {
+  return function Heading(props: T) {
+    const text = getText(props.children);
+    const id = (props as any).id ?? (text ? slugify(text) : undefined);
+
+    return React.createElement(Tag, {
+      ...props,
+      id,
+      "data-toc-heading": "true",
+      "data-level": String(level),
+      className: clsx(className, props.className),
+      children: props.children,
+    });
+  };
+}
