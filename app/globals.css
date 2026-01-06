@@ -416,43 +416,18 @@
 
   width: 100%;
   margin-inline: auto;
-  overflow: auto;
+  overflow: hidden;
 
   max-width: min(var(--modal-max-w-desktop), 92vw);
   max-height: calc(100dvh - var(--modal-height-desktop-gap));
   padding: var(--modal-padding-desktop);
 
-  /* Firefox scrollbar */
+  /* Firefox scrollbar
   scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb) transparent;
+  scrollbar-color: var(--scrollbar-thumb) transparent; */
 
   /* 레이아웃 점프 방지(윈도우) */
   scrollbar-gutter: stable both-edges;
-}
-
-.project-modal::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-.project-modal::-webkit-scrollbar-track {
-  background: transparent;
-}
-.project-modal::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar-thumb);
-  border-radius: 9999px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-.project-modal::-webkit-scrollbar-thumb:hover {
-  background-color: var(--scrollbar-thumb-hover);
-}
-.project-modal::-webkit-scrollbar-button {
-  width: 0;
-  height: 0;
-  display: none;
-}
-.project-modal::-webkit-scrollbar-corner {
-  background: transparent;
 }
 
 .project-modal--default {
@@ -487,15 +462,55 @@
 
 /* 닫기 버튼 (모바일 우상단 고정) */
 .modal-close {
-  position: absolute;
-  top: 40px;
-  right: 12px;
   z-index: 10;
 }
 
 .modal-body {
   max-width: 100%;
   margin: 0 auto;
+}
+
+@supports (-webkit-appearance: none) {
+  .modal-scroll {
+    scrollbar-width: auto;
+    scrollbar-color: auto;
+  }
+
+  .modal-scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .modal-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .modal-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  .modal-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover);
+  }
+  .modal-scroll::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
+  .modal-scroll::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+@supports (scrollbar-color: transparent) and (not (-webkit-appearance: none)) {
+  .modal-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+  }
 }
 
 /* 모바일(sheet) 모달: 화면 전체 시트 형태 */
