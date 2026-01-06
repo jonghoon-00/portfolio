@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
-export function useScrollSpy(sectionIds: string[], offset = 0) {
+/**
+ *
+ * 랜딩 섹션 감지용 스크롤 스파이
+ */
+export function useSectionScrollSpy(sectionIds: string[], offset = 0) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
