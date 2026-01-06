@@ -1,3 +1,4 @@
+import ProjectContentShell from "@/components/layout/ProjectContentShell";
 import { Prose } from "@/components/mdx/Prose";
 import { PROJECT_IDS } from "@/constants/projectIds";
 import { getProjectById } from "@/lib/data/projects.public";
@@ -47,11 +48,13 @@ export default async function ProjectPage({
       >
         {project.title}
       </h1>
-      <article style={{ ["--accent" as any]: project.accent }}>
-        <Prose>
-          <Mdx />
-        </Prose>
-      </article>
+      <ProjectContentShell scrollRootEl={null} className="-mt-5 ml-9">
+        <article style={{ ["--accent" as any]: project.accent }}>
+          <Prose>
+            <Mdx />
+          </Prose>
+        </article>
+      </ProjectContentShell>
     </main>
   );
 }

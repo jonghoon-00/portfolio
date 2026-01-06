@@ -4,12 +4,12 @@ import clsx from "clsx";
 import React from "react";
 
 import { SECTIONS } from "@/constants/sections";
-import { useScrollSpy } from "@/hooks/useScrollSpy";
+import { useSectionScrollSpy } from "@/hooks/useSectionScrollSpy";
 
 export default function Nav() {
   const HEADER_HEIGHT = 48; // 헤더 높이만큼 오프셋
 
-  const activeId = useScrollSpy(
+  const activeId = useSectionScrollSpy(
     SECTIONS.map((s) => s.id),
     HEADER_HEIGHT
   );

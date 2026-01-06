@@ -18,9 +18,5 @@ export function AnchorHeading({
 }: AnchorHeadingProps) {
   const Comp = level === 2 ? H2 : level === 3 ? H3 : H4;
 
-  return (
-    <Comp id={id} style={{ scrollMarginTop: `${scrollMt}px` }}>
-      {title}
-    </Comp>
-  );
+  return <Comp id={id}>{title}</Comp>;
 }

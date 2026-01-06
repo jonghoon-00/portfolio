@@ -10,7 +10,7 @@ import SoftDivider from "../ui/SoftDivider";
 import { AnchorHeading } from "./customTag/AnchorHeading";
 
 //프로젝트 타이틀
-const H1 = withHeadingMeta(
+export const H1 = withHeadingMeta(
   "h1",
   1,
   clsx(
@@ -21,7 +21,7 @@ const H1 = withHeadingMeta(
   )
 );
 //큰 섹션
-const H2 = withHeadingMeta(
+export const H2 = withHeadingMeta(
   "h2",
   2,
   clsx(
@@ -32,7 +32,7 @@ const H2 = withHeadingMeta(
   )
 );
 //번호 섹션
-const H3 = withHeadingMeta(
+export const H3 = withHeadingMeta(
   "h3",
   3,
   clsx(
@@ -43,7 +43,7 @@ const H3 = withHeadingMeta(
   )
 );
 //문제, 판단, 해결, 결과 등등
-const H4 = withHeadingMeta(
+export const H4 = withHeadingMeta(
   "h4",
   4,
   clsx(
