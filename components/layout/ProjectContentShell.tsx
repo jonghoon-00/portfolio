@@ -20,12 +20,12 @@ export default function ProjectContentShell({
     <>
       <div className="md:grid md:grid-cols-[minmax(0,1fr)_56px] md:gap-6">
         {/* 본문 */}
-        <div ref={contentRef} className="min-w-0">
+        <div ref={contentRef} className="min-w-0 mb-16">
           {children}
         </div>
 
         {/* 우측 gutter(레일 자리) */}
-        <aside className="md:relative md:block hidden">
+        <aside className="md:block hidden">
           <div className={clsx("fixed mr-6", className)}>
             <FloatingToc
               containerRef={contentRef}

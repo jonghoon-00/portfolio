@@ -79,7 +79,8 @@ export default function ProjectModal({
       className={clsx(
         "fixed inset-0 z-100",
         "bg-black/40",
-        "flex items-center justify-center"
+        "flex items-center justify-center",
+        "p-3 md:p-6"
       )}
       onClick={handleClose}
       role="dialog"
@@ -95,7 +96,7 @@ export default function ProjectModal({
         )}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="prose prose-neutral max-w-none flex flex-col">
+        <div className="prose prose-neutral max-w-none flex flex-col w-fit mx-auto min-h-0 h-[80vh]">
           <header
             ref={headerRef}
             className={clsx(
