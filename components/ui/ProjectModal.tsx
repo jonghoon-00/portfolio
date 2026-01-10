@@ -96,7 +96,12 @@ export default function ProjectModal({
         )}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="prose prose-neutral max-w-none flex flex-col w-fit mx-auto min-h-0 h-[80vh]">
+        <div
+          className={clsx(
+            "prose prose-neutral max-w-none flex flex-col w-fit mx-auto min-h-0",
+            size !== "sm" && "h-[80vh]"
+          )}
+        >
           <header
             ref={headerRef}
             className={clsx(

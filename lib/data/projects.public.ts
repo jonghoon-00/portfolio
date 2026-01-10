@@ -18,13 +18,13 @@ export const MAIN_PROJECT_CARD_META: Record<
     techTags: string[];
   }
 > = {
-  "design-system-showcase": {
-    imageSrc: "",
-    imageAlt: "UI-KIT 메인 화면",
-    description: "UI 시스템 설계, 운영에 대한 사고방식을 담은 프로젝트입니다.",
-    contextTags: [],
-    techTags: [],
-  },
+  // "design-system-showcase": {
+  //   imageSrc: "",
+  //   imageAlt: "UI-KIT 메인 화면",
+  //   description: "UI 시스템 설계, 운영에 대한 사고방식을 담은 프로젝트입니다.",
+  //   contextTags: [],
+  //   techTags: [],
+  // },
   "k-nostalgia": {
     imageSrc: kNostalgiaCover.src,
     imageAlt: "향그리움(K-Nostalgia) 서비스 메인 화면",
@@ -58,14 +58,14 @@ export const MAIN_PROJECT_CARD_META: Record<
 
 // 메인 프로젝트 MDX
 export const PROJECTS: ProjectMetaBase[] = [
-  {
-    id: PROJECT_IDS.UI_KIT,
-    title: "UI Kit / Design System Showcase",
-    accent: "#4A90E2",
-    type: "personal",
-    techs: [],
-    mdx: () => import("@/markdown/projects/ui-kit.mdx"),
-  },
+  // {
+  //   id: PROJECT_IDS.UI_KIT,
+  //   title: "UI Kit / Design System Showcase",
+  //   accent: "#4A90E2",
+  //   type: "personal",
+  //   techs: [],
+  //   mdx: () => import("@/markdown/projects/ui-kit.mdx"),
+  // },
   {
     id: PROJECT_IDS.K_NOSTALGIA,
     title: "향그리움 (K-Nostalgia)",
@@ -146,7 +146,7 @@ export const OTHER_PROJECTS: OtherProjectMeta[] = [
       "알라딘 API를 활용한 도서 의견 공유 커뮤니티형 서비스.",
       "상세 페이지에 Quill 에디터를 활용한 댓글 CRUD를 구현했습니다.",
     ],
-    tags: ["React", "Quill Editor", "CRUD", "Aladin API"],
+    tags: ["React", "Quill Editor", "Tailwind CSS", "Tanstack Query"],
     githubUrl: "https://github.com/jonghoon-00/8th-bookShare",
     //TODO: deployUrl: "...",
     mdx: BookInDetailMdx,
@@ -156,7 +156,7 @@ export const OTHER_PROJECTS: OtherProjectMeta[] = [
     title: "🎮 포켓몬 도감 (1세대)",
     badge: "부트캠프 과제",
     summary: [
-      "PokeAPI를 활용해 151마리 포켓몬 도감을 구현한 프로젝트입니다.",
+      "PokeAPI를 활용해 151마리 포켓몬 도감을 구현한 토이 프로젝트입니다.",
       "API 활용 + 데이터 가공 + 메타데이터 동적 처리",
     ],
     tags: ["Next.js 14", "TypeScript", "TanStack Query", "TailwindCSS"],
@@ -168,8 +168,8 @@ export const OTHER_PROJECTS: OtherProjectMeta[] = [
     title: "🏦 Expense Tracker (가계부)",
     badge: "부트캠프 과제",
     summary: [
-      "월별/일별 지출 내역을 관리하고 통계를 시각화한 서비스.",
-      "상태 관리 리팩토링에 집중한 프로젝트입니다.",
+      "월별/일별 지출 내역을 관리하고 통계를 시각화한 프로젝트형 과제",
+      "과제 내용 : pros drilling > context api > redux 순으로 리팩토링",
     ],
     tags: ["React", "Context API", "Redux", "상태관리 리팩토링"],
     githubUrl: "https://github.com/jonghoon-00/assignment_expense_report",
