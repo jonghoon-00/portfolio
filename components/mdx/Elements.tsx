@@ -8,6 +8,7 @@ import { OtherProjectCard } from "@/components/views/projects/OtherProjects";
 import { SectionDivider } from "../ui/SectionDivider";
 import SoftDivider from "../ui/SoftDivider";
 import { AnchorHeading } from "./customTag/AnchorHeading";
+import BoardmateIdbSchemaTable from "./customTag/tables/BoardmateIdbSchemaTable";
 
 //프로젝트 타이틀
 export const H1 = withHeadingMeta(
@@ -27,7 +28,7 @@ export const H2 = withHeadingMeta(
   clsx(
     "mt-16 mb-4",
     "font-semibold tracking-[-0.02em]",
-    "text-[clamp(24px,3.8vw,32px)] leading-[1.2]",
+    "text-[clamp(24px,4.2vw,32px)] leading-[1.2]",
     "text-[rgb(var(--text-strong))]"
   )
 );
@@ -38,7 +39,7 @@ export const H3 = withHeadingMeta(
   clsx(
     "mt-10 mb-2",
     "font-semibold tracking-[-0.01em]",
-    "text-[clamp(19px,3vw,25px)] leading-tight",
+    "text-[clamp(19px,3.6vw,25px)] leading-tight",
     "text-[rgb(var(--accent))]"
   )
 );
@@ -49,7 +50,7 @@ export const H4 = withHeadingMeta(
   clsx(
     "mt-6 mb-1",
     "font-medium tracking-[-0.005em]",
-    "text-[clamp(15px,1.7vw,18px)] leading-normal",
+    "text-[clamp(16px,2.2vw,18px)] leading-normal",
     "text-[rgb(var(--text-muted))]"
   )
 );
@@ -59,7 +60,7 @@ function P(props: React.HTMLAttributes<HTMLParagraphElement>) {
     <p
       className={clsx(
         "my-3",
-        "text-[clamp(15px,1.1vw,20px)] leading-[1.75]",
+        "text-[clamp(15px,1.15vw,18px)] leading-[1.75]",
         "text-[rgb(var(--text-strong))]"
       )}
       {...props}
@@ -290,6 +291,7 @@ export const mdxComponents = {
   SectionDivider,
   SoftDivider,
   AnchorHeading,
+  BoardmateIdbSchemaTable,
 };
 
 // 유틸 함수
