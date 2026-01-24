@@ -5,7 +5,7 @@ import React from "react";
 export type TocItem = {
   id: string;
   text: string;
-  level: 2 | 3 | 4;
+  level: 1 | 2 | 3;
   el: HTMLElement;
 };
 
@@ -25,7 +25,7 @@ export function useToc(containerRef: React.RefObject<HTMLElement | null>) {
 
     for (const el of headings) {
       const level = Number(el.getAttribute("data-level") ?? "0");
-      if (level < 2 || level > 4) continue;
+      if (level < 1 || level > 3) continue;
 
       const text = (el.textContent ?? "").trim();
       if (!text) continue;
@@ -54,7 +54,7 @@ export function useToc(containerRef: React.RefObject<HTMLElement | null>) {
       next.push({
         id: uniqueId,
         text,
-        level: level as 2 | 3 | 4,
+        level: level as 1 | 2 | 3,
         el,
       });
     }

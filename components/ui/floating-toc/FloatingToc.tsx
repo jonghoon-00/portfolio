@@ -44,9 +44,9 @@ function scrollToHeading(
 }
 
 // h2 가장 길고, h4로 갈수록 짧게
-function barWidth(level: 2 | 3 | 4) {
-  if (level === 2) return "w-7";
-  if (level === 3) return "w-5";
+function barWidth(level: 1 | 2 | 3) {
+  if (level === 1) return "w-7";
+  if (level === 2) return "w-5";
   return "w-3";
 }
 
@@ -117,7 +117,7 @@ export function FloatingToc({
             {items.map((it) => {
               const isActive = it.id === activeId;
               const indent =
-                it.level === 2 ? "pl-0" : it.level === 3 ? "pl-3" : "pl-6";
+                it.level === 1 ? "pl-0" : it.level === 2 ? "pl-3" : "pl-6";
 
               return (
                 <li key={it.id} className={indent}>
