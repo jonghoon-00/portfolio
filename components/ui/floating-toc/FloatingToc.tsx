@@ -43,7 +43,7 @@ function scrollToHeading(
   el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-// h2 가장 길고, h4로 갈수록 짧게
+// h1 가장 길고, h3으로 갈수록 짧게
 function barWidth(level: 1 | 2 | 3) {
   if (level === 1) return "w-7";
   if (level === 2) return "w-5";
@@ -59,6 +59,8 @@ export function FloatingToc({
   scrollRootEl?: Element | null;
 }) {
   const items = useToc(containerRef);
+  const [tip, setTip] = React.useState({ show: false, x: 0, y: 0 });
+  const [isAtTop, setIsAtTop] = React.useState(true);
 
   const spyItems = React.useMemo(
     () => items.map((it) => ({ id: it.id, el: it.el })),
@@ -70,6 +72,31 @@ export function FloatingToc({
     rootMargin: "-15% 0px -75% 0px",
     threshold: [0, 1],
   });
+
+  const handleScrollTop = () => {
+    if (scrollRootEl instanceof HTMLElement) {
+      scrollRootEl.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  React.useEffect(() => {
+    const root = scrollRootEl instanceof HTMLElement ? scrollRootEl : window;
+
+    const update = () => {
+      const top =
+        root === window
+          ? window.scrollY
+          : (root as HTMLElement).scrollTop;
+      setIsAtTop(top <= 0);
+    };
+
+    update();
+    root.addEventListener("scroll", update, { passive: true });
+    
+    return () => root.removeEventListener("scroll", update);
+  }, [scrollRootEl]);
 
   if (items.length === 0) return null;
 
@@ -111,7 +138,20 @@ export function FloatingToc({
         )}
       >
         <div className="px-4 py-3 text-sm">
-          <div className="mb-2 font-medium text-white/60">On this page</div>
+          <button
+            type="button"
+            className="mb-2 font-medium text-white/60 cursor-pointer"
+            onClick={handleScrollTop}
+            onMouseEnter={(e) =>
+              setTip({ show: true, x: e.clientX, y: e.clientY })
+            }
+            onMouseLeave={() => setTip((prev) => ({ ...prev, show: false }))}
+            onMouseMove={(e) =>
+              setTip({ show: true, x: e.clientX, y: e.clientY })
+            }
+          >
+            On this page
+          </button>
 
           <ul className="space-y-1.5">
             {items.map((it) => {
@@ -139,6 +179,20 @@ export function FloatingToc({
           </ul>
         </div>
       </div>
+      {tip.show && !isAtTop && (
+        <div
+          className={clsx(
+            "fixed z-50", 
+            "pointer-events-none select-none", 
+            "text-xs text-white/80",
+            "bg-black",
+            "px-0.5 py-1",
+          )}
+          style={{ left: tip.x + 12, top: tip.y + 12 }}
+        >
+          최상단 이동
+        </div>
+      )}
     </div>
   );
 }
