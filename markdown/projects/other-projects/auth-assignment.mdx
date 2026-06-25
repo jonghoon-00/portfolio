@@ -1,16 +1,18 @@
-> 회원가입, 로그인, 마이페이지 등 인증/인가 전반 구현 (개발 기간: 3일)
+> 회원가입, 로그인, 마이페이지 등 인증/인가 전반 구현 (기간: `3일`)
 
 #### **핵심 구현**
 
-- 권한별 라우팅 제어 (ProtectedRoute)
-- Zustand + Axios 인터셉터를 활용한 토큰 관리 자동화
-- TanStack Query를 통한 서버 상태 관리
-- Tailwind 플러그인 커스터마이징으로 재사용 가능한 스타일 클래스 구성
+- **권한별 라우팅 제어**: ProtectedRoute 컴포넌트를 레이아웃 레벨에 배치하여 토큰 부재 시 자동 로그인 페이지 리다이렉트
+- **토큰 관리 자동화**: Zustand 스토어와 Axios 인터셉터를 결합하여 인증이 필요한 요청에만 헤더 토큰 자동 주입
+- **서버 상태 관리**: TanStack Query로 API 통신 로직과 캐싱 전략 분리, `api/auth.ts`와 `hooks/queries`로 관심사 분리
+- **스타일 시스템**: Tailwind 커스텀 플러그인(`tailwind.config.ts`)으로 재사용 가능한 디자인 토큰 구축
 
-#### **기술적 시도**
+#### **기술적 고민**
 
-- `api/axios.ts`: 요청/응답 인터셉터로 토큰 자동 주입
-- `ProtectedRoute.tsx`: 레이아웃 레벨 인증 가드 구현
-- `constants/queryKeys.ts`: 쿼리키 중앙 관리
+- 요청/응답 인터셉터에서 토큰 필요 여부를 판단하는 로직 설계 (`api/axios.ts`)
+- 쿼리키 네이밍 컨벤션 수립 및 중앙 관리(`constants/queryKeys.ts`)
+- 백엔드 미연결 상황에서도 구현 가능한 아키텍처 설계
+
+#### 
 
 [배포 링크](https://fe-internship-task.vercel.app/) · [GitHub](https://github.com/jonghoon-00/fe-internship-task)

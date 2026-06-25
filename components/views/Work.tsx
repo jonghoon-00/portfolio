@@ -95,7 +95,8 @@ export default function Work({ heroDone }: WorkProps) {
                 <Columns
                   cols={2}
                   equalCols={false}
-                  gap="gap-8 md:gap-10"
+                  // gap="gap-8 md:gap-10"
+                  // gap={}
                   className="md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]"
                 >
                   {/* LEFT: meta + 요약 */}
@@ -120,7 +121,7 @@ export default function Work({ heroDone }: WorkProps) {
                         className={clsx(
                           "text-[clamp(15px,1vw,18px)]",
                           "leading-[1.65]",
-                          "mt-1"
+                          "mt-1",
                         )}
                       >
                         {summary}
@@ -134,7 +135,7 @@ export default function Work({ heroDone }: WorkProps) {
                       variants={rightVariants}
                       className={clsx(
                         "mt-6 pt-6 border-t border-[rgb(var(--border))]/60",
-                        "md:mt-0 md:pt-0 md:pl-10 md:border-t-0 md:border-l"
+                        "md:mt-0 md:pt-0 md:pl-10 md:border-t-0 md:border-l",
                       )}
                     >
                       <div className="space-y-8">
@@ -145,7 +146,7 @@ export default function Work({ heroDone }: WorkProps) {
                             className={clsx(
                               "mt-3 pl-5 list-disc",
                               "space-y-2.5",
-                              "text-[clamp(15px,0.9vw,19px)] leading-[1.65]"
+                              "text-[clamp(15px,0.9vw,19px)] leading-[1.65]",
                             )}
                           >
                             {duties.map((duty) => (
@@ -161,7 +162,7 @@ export default function Work({ heroDone }: WorkProps) {
                             className={clsx(
                               "mt-3 pl-5 list-disc",
                               "space-y-2.5",
-                              "text-[clamp(15px,0.9vw,18px)] leading-[1.65]"
+                              "text-[clamp(15px,0.9vw,18px)] leading-[1.65]",
                             )}
                           >
                             {learnings.map((item) => (
@@ -174,7 +175,7 @@ export default function Work({ heroDone }: WorkProps) {
                   </Col>
                 </Columns>
               </motion.section>
-            )
+            ),
           )}
         </motion.div>
       </div>
