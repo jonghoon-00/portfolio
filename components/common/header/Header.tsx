@@ -1,6 +1,5 @@
 "use client";
 
-import { logoFont } from "@/app/fonts";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import Nav from "./Nav";
@@ -13,8 +12,9 @@ export default function Header() {
         <div className="header-inner">
           <button
             className={clsx(
-              logoFont.className,
-              "text-xs md:text-sm tracking-[0.16em]"
+              // logoFont.className,
+              "cursor-pointer",
+              "text-xs md:text-sm tracking-[0.16em]",
             )}
             onClick={(e) => {
               router.push("/");
